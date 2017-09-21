@@ -35,6 +35,10 @@
 			) FROM TABLES 
 			WHERE TABLE_SCHEMA='数据库名';
 			```
+	- in 和 FIND_IN_SET(代替in)
+		- id in(1,2,3) 或 name in ('a','b','c')
+		- find_in_set(id,'a,b,c')
+		- instr 这个会出现间接的失效 
 	- 1=1妙用
 		- AND IF(_which_day !='0000-00-00', dj_checklist.which_date = _which_day, '1=1') 
 	- if巧用
