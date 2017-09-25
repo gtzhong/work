@@ -105,7 +105,8 @@
 		- [mysqld] bind-address=127.0.0.1
 	- 修改数据库,不使用密码
 		- [mysqld] skip_grant_tables
-
+	-如果"导出"出现问题,有可能是太大了
+		- max_allowed_packet = 500M  
 - sqlmap @idaxia
 	- [sqlmap中文注释](fn/sqlmap/sqlmap中文注释.txt)
 	- [python与sqlmap安装](fn/sqlmap/README.md#python与sqlmap安装)
