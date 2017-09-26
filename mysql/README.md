@@ -35,6 +35,10 @@
 			) FROM TABLES 
 			WHERE TABLE_SCHEMA='数据库名';
 			```
+	- in 和 FIND_IN_SET(代替in)
+		- id in(1,2,3) 或 name in ('a','b','c')
+		- find_in_set(id,'a,b,c')
+		- instr 这个会出现间接的失效 
 	- 1=1妙用
 		- AND IF(_which_day !='0000-00-00', dj_checklist.which_date = _which_day, '1=1') 
 	- if巧用
@@ -103,7 +107,8 @@
 		- [mysqld] bind-address=127.0.0.1
 	- 修改数据库,不使用密码
 		- [mysqld] skip_grant_tables
-
+	-如果"导出"出现问题,有可能是太大了
+		- max_allowed_packet = 500M  
 - sqlmap @idaxia
 	- [sqlmap中文注释](fn/sqlmap/sqlmap中文注释.txt)
 	- [python与sqlmap安装](fn/sqlmap/README.md#python与sqlmap安装)
