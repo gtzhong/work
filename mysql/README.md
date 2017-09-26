@@ -58,7 +58,7 @@
 		```
 	- between 
 		- 字符串判断是否在范围内
-		```
+		```mysql
         //例a
 		SELECT 'b' BETWEEN 'a' AND 'c'
 		
@@ -66,7 +66,7 @@
 		SELECT * FROM user WHERE username BETWEEN 'a' AND 'k'
 		```
 		- 数字判断是否在范围内
-		```
+		```mysql
 		//1.例a
 		SELECT 3 BETWEEN 2 AND 5
 
@@ -78,7 +78,9 @@
 		
 		//3.其它
 		SELECT * FROM user WHERE uid BETWEEN 2 AND 5
-			```
+		```
+	- date_add
+		- x
 	- function函数
 		- [循环DECLARE cur_1 CURSOR再运行操作](fn/function/function_循环DECLARE_cur_1_CURSOR再运行操作.sql)
 	- 找回密码

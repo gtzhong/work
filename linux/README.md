@@ -109,6 +109,8 @@
 			- npm -v 
 		- npm run build时出现Cannot find module 'glob'则运行
 			- npm install glob
+	- npm和node删除
+		- yum remove nodejs npm -y
 	- 查看 
 		- uname -a  //查看系统多少位 32位/64
 		- ps
