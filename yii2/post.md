@@ -306,6 +306,16 @@ if(!$model){
 }
 $model->group_schedule = $group_schedule;
 $res = $model->save(false);
+
+//或
+if ($oId == '') {
+    $model = new Dporder();
+} else {
+    $model = Dporder::findOne($oId);
+}
+
+$model->group_schedule = $group_schedule;
+
 ```
 
 #yii2自带函数连接  

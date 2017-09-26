@@ -58,7 +58,11 @@
 			- 来源于 [服务模块仅企业帐号可登陆](vding_api.md#服务模块仅企业帐号可登陆) 
 	- composer
 		- 如yii2的更新,手动删除vendor下目录yiisoft,再执行 composer install by_zhou 
-	
+	- 前端开发
+		- [前端提交获取csrf相关参数](fn/frontend/README.md#前端提交获取csrf相关参数)
+		- [view页面js使用](fn/frontend/README.md#view页面js使用)
+		- [前端css和js加上时间版本_方便管理强制刷新](fn/rbac.md#前端css和js加上时间版本_方便管理强制刷新)
+		- [根据环境加载是否压缩的js和css](fn/frontend/README.md#根据环境加载是否压缩的js和css)
 	- fn 功能模块
 		-  ArrayHelper
 			- [ArrayHelper::merge](function.md#ArrayHelper_merge) 数组合并
