@@ -203,6 +203,11 @@
 			- [服务器定位](servicelocal.md) 配置服务的参数信息
 				- [控制器配置调用](servicelocal.md#控制器配置调用)
 				- [参数配置在文件并调用](servicelocal.md#参数配置在文件并调用)
+	- filter过滤器
+		- 案例
+			- 过滤器AccessControl和VerbFilter及全局设置
+				- [CommonController定义](fn/filter/README.md#CommonController定义)
+				- [普通控制器设置过滤](fn/filter/README.md#普通控制器设置过滤)
 	- widget
 		- [widget简单例子](widget.md#widget简单例子)
 			- [1创建一个TestWidget](widget.md#1创建一个TestWidget)
@@ -446,6 +451,21 @@
 	- 权限分析 [yii2_admin]
 	- App接口全局配置
 	- 用户登陆 [yii start kit]
+		- yii2_user流程思路
+			- 配置文件
+			```
+			'user'=>[
+				'identityClass'=>'app\models\User',
+				'enableAutoLogin'=>true
+			]
+			```
+			- 新建一个user类实现 yii\web\IdentityInterface类
+			- 实现5个接口
+				- yii\web\IdentityInterface::findIdentity()
+				- yii\web\IdentityInterface::findIdentityByAccessToken()
+				- yii\web\IdentityInterface::getId()
+				- yii\web\IdentityInterface::getAuthKey()
+				- yii\web\IdentityInterface::validateAuthKey()
 		- user组件定义
 			- [company模块里包含"企业用户"与小模块里的"H5店铺"两个用户](user.md#company模块里包含"企业用户"与小模块里的"H5店铺"两个用户)  
 			- [ResultApi用户](user.md#ResultApi用户)  
