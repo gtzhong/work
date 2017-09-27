@@ -72,6 +72,7 @@ class OrderController extends CommonController
 **源代码**  
 [CommonController.php]
 (https://github.com/408824338/yii2_Jason/blob/master/modules/controllers/CommonController.php)  
+[web.php](https://github.com/408824338/yii2_Jason/blob/master/config/web.php)  
 
 **yii2_Jason/config/web.php**
 
