@@ -206,8 +206,10 @@
 	- filter过滤器
 		- 案例
 			- 过滤器AccessControl和VerbFilter及全局设置
-				- [CommonController定义](fn/filter/README.md#CommonController定义)
-				- [普通控制器设置过滤](fn/filter/README.md#普通控制器设置过滤)
+				- 前台
+					- [CommonController定义](fn/filter/README.md#CommonController定义)
+					- [普通控制器设置过滤](fn/filter/README.md#普通控制器设置过滤)
+				- [后台设置全局filter过滤器和verbFilter](fn/filter/README.md#后台设置全局filter过滤器和verbFilter)
 	- widget
 		- [widget简单例子](widget.md#widget简单例子)
 			- [1创建一个TestWidget](widget.md#1创建一个TestWidget)
@@ -466,6 +468,27 @@
 				- yii\web\IdentityInterface::getId()
 				- yii\web\IdentityInterface::getAuthKey()
 				- yii\web\IdentityInterface::validateAuthKey()
+			- 实现前后端登陆配置
+			```php
+			'components' => [
+				'user' => [
+					'identityClass' => 'app\models\User',
+					'enableAutoLogin' => true,
+					'idParam' => '__user',
+					'identityCookie' => ['name' => '__user_identity', 'httpOnly' => true],
+					'loginUrl' => ['/member/auth'],
+				],
+				'admin' => [
+					'class' => 'yii\web\User',
+					'identityClass' => 'app\modules\models\Admin',
+					'idParam' => '__admin',
+					'identityCookie' => ['name' => '__admin_identity', 'httpOnly' => true],
+					'enableAutoLogin' => true,
+					'loginUrl' => ['/admin/public/login'],
+				]
+			]
+			```
+		- 使用
 		- user组件定义
 			- [company模块里包含"企业用户"与小模块里的"H5店铺"两个用户](user.md#company模块里包含"企业用户"与小模块里的"H5店铺"两个用户)  
 			- [ResultApi用户](user.md#ResultApi用户)  
