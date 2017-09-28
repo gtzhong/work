@@ -265,7 +265,7 @@ import success
 ![](images/import_auth_item_res.png)
 
 
-## 对某用户分配角色或权限
+## 对某角色_分配角色或权限
 
 **源代码**   
 [RbacController.php](https://github.com/408824338/yii2_Jason/blob/master/commands/RbacController.php)    
