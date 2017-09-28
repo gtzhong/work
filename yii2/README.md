@@ -382,6 +382,10 @@
 					- http://rbac.ysk.dev/user/vlogin?uid=1  //修改指定的uid即可
 					- [每次访问的验证伪登陆](fn/rbac.md#每次访问的验证伪登陆)
 				- [rbac验证过程](fn/rbac.md#rbac验证过程)
+		- RBAC慕课开发平台 @Jason
+			- [配置文件](fn/rbac/jason/README.md#配置文件)
+			- [生成权限表](fn/rbac/jason/README.md#生成权限表)
+			- [创建角色](fn/rbac/jason/README.md#创建角色)
 		- yii2 admin 分析
 			- [yii2_admin_反射获取action](fn/yii2_admin/README.md#yii2_admin_反射获取action)
 			- 配置_yii2_admin
