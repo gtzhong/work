@@ -117,6 +117,8 @@ class RbacController extends CommonController
 
 ## 创建权限列表及分页
 
+![](images/assign_role_permission.png)
+
 **源代码**  
 [RbacController.php](https://github.com/408824338/yii2_Jason/blob/master/modules/controllers/RbacController.php)  
 [_items.php](https://github.com/408824338/yii2_Jason/blob/master/modules/views/rbac/_items.php)  视图文件
@@ -266,6 +268,7 @@ import success
 
 
 ## 对某角色_分配角色或权限
+> 卖点:角色可以再分配指定的角色  
 
 **源代码**   
 [RbacController.php](https://github.com/408824338/yii2_Jason/blob/master/commands/RbacController.php)    
@@ -292,16 +295,19 @@ class RbacController extends CommonController
     {
         $name = htmlspecialchars($name); //前端传过来的 manager 角色名称
         $auth = Yii::$app->authManager;
-        $parent = $auth->getRole($name);
+        $parent = $auth->getRole($name); //获取批定角色 object
         if (Yii::$app->request->isPost) {
             $post = Yii::$app->request->post();
             if (Rbac::addChild($post['children'], $name)) {
                 Yii::$app->session->setFlash('info', '分配成功');
             }
         }
-        $children = Rbac::getChildrenByName($name);
-        $roles = Rbac::getOptions($auth->getRoles(), $parent);
-        $permissions = Rbac::getOptions($auth->getPermissions(), $parent);
+
+        //$auth->getRoles() 获取所有的角色
+        //$auth->getPermissions() 获取所有的权限
+        $children = Rbac::getChildrenByName($name);  //获取 auth_item_child.parent 等于 $name ,即获取分配的角色或权限列表
+        $roles = Rbac::getOptions($auth->getRoles(), $parent); //获取-角色子节点 (获取未添加)
+        $permissions = Rbac::getOptions($auth->getPermissions(), $parent);//获取-权限子节点 (获取未添加)
         return $this->render('_assignitem', ['parent' => $name, 'roles' => $roles, 'permissions' => $permissions, 'children' => $children]);
     }
 }    
@@ -354,11 +360,16 @@ use yii\db\ActiveRecord;
 use Yii;
 class Rbac extends ActiveRecord 
 {
-    //生成复选框
+    /**
+     * 对角色和权限_生成复选框
+     * $data  数据包
+     * $parent  //指定角色的对象 即 auth_item.type = 1 的指定记录
+    */
     public static function getOptions($data, $parent)
     {
         $return = [];
         foreach ($data as $obj) {
+            //过滤显示 && 是否已经添加
             if (!empty($parent) && $parent->name != $obj->name && Yii::$app->authManager->canAddChild($parent, $obj)) {
                 $return[$obj->name] = $obj->description;
             }
@@ -369,7 +380,7 @@ class Rbac extends ActiveRecord
         return $return;
     }
 
-    //对某个添加角色与权限
+    //对某个角色 添加角色或权限
     public static function addChild($children, $name)
     {
         $auth = Yii::$app->authManager;
@@ -391,6 +402,32 @@ class Rbac extends ActiveRecord
         }
         return true;
     }
+
+   //根据角色$name 获取已经分配的角色和权限
+    public static function getChildrenByName($name)
+    {
+        if (empty($name)) {
+            return [];
+        }
+        $return = [];
+        $return['roles'] = [];
+        $return['permissions'] = [];
+        $auth = Yii::$app->authManager;
+
+        //获取 auth_item_child.parent 等于 name ,即获取分配的角色或权限列表
+        $children = $auth->getChildren($name);
+        if (empty($children)) {
+            return [];
+        }
+        foreach ($children as $obj) {
+            if ($obj->type == 1) { //角色
+                $return['roles'][] = $obj->name;
+            } else {
+                $return['permissions'][] = $obj->name;
+            }
+        }
+        return $return;
+    }    
 }    
 ```
 
