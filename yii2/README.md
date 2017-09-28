@@ -390,6 +390,7 @@
 			- [创建角色](fn/rbac/jason/README.md#创建角色)
 			- [创建权限列表及分页](fn/rbac/jason/README.md#创建权限列表及分页)
 			- [批量导入控制器的方法入数据库](fn/rbac/jason/README.md#批量导入控制器的方法入数据库)
+			- [对某用户分配角色或权限](fn/rbac/jason/README.md#对某用户分配角色或权限)
 		- yii2 admin 分析
 			- [yii2_admin_反射获取action](fn/yii2_admin/README.md#yii2_admin_反射获取action)
 			- 配置_yii2_admin

@@ -264,3 +264,138 @@ import success
 
 ![](images/import_auth_item_res.png)
 
+
+## 对某用户分配角色或权限
+
+**源代码**   
+[RbacController.php](https://github.com/408824338/yii2_Jason/blob/master/commands/RbacController.php)    
+[_assignitem.php](https://github.com/408824338/yii2_Jason/blob/master/modules/views/rbac/_assignitem.php) 视图文件   
+[Rbac.php](https://github.com/408824338/yii2_Jason/blob/master/modules/models/Rbac.php) model  
+
+
+![](images/assign_role_permission.png)
+
+**yii2_Jason/modules/controllers/RbacController.php**
+```php
+<?php
+namespace app\modules\controllers;
+use Yii;
+use \yii\data\ActiveDataProvider;
+use \yii\db\Query;
+use app\modules\models\Rbac;
+class RbacController extends CommonController
+{
+    public $mustlogin = ['createrule', 'createrole', 'roles', 'assignitem'];
+
+    //
+    public function actionAssignitem($name)
+    {
+        $name = htmlspecialchars($name); //前端传过来的 manager 角色名称
+        $auth = Yii::$app->authManager;
+        $parent = $auth->getRole($name);
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if (Rbac::addChild($post['children'], $name)) {
+                Yii::$app->session->setFlash('info', '分配成功');
+            }
+        }
+        $children = Rbac::getChildrenByName($name);
+        $roles = Rbac::getOptions($auth->getRoles(), $parent);
+        $permissions = Rbac::getOptions($auth->getPermissions(), $parent);
+        return $this->render('_assignitem', ['parent' => $name, 'roles' => $roles, 'permissions' => $permissions, 'children' => $children]);
+    }
+}    
+```
+
+**yii2_Jason/modules/views/rbac/_assignitem.php**
+
+![](images/assign_role_permission_view.png)
+
+```php
+<div class="container">
+        <?php
+        if (Yii::$app->session->hasFlash('info')) {
+            echo Yii::$app->session->getFlash('info');
+        }
+        $form = ActiveForm::begin([
+            'fieldConfig' => [
+                'template' => '<div class="span12 field-box">{label}{input}</div>{error}',
+            ],
+            'options' => [
+                'class' => 'new_user_form inline-input',
+            ],
+        ]);
+        ?>
+        <div class="span12 field-box">
+        <?php echo Html::label('角色名称', null). Html::encode($parent); ?>
+        </div>
+        <div class="span12 field-box">
+        <?php echo Html::label('角色子节点', null). Html::checkboxList('children', $children['roles'], $roles); ?>
+        </div>
+        <div class="span12 field-box">
+        <?php echo Html::label('权限子节点', null). Html::checkboxList('children', $children['permissions'], $permissions); ?>
+        </div>
+        
+        <div class="span11 field-box actions">
+            <?php echo Html::submitButton('分配', ['class' => 'btn-glow primary']); ?>
+            <span>OR</span>
+            <?php echo Html::resetButton('取消', ['class' => 'reset']); ?>
+        </div>
+    <?php ActiveForm::end(); ?>
+</div>
+```
+
+**yii2_Jason/modules/models/Rbac.php**
+
+```php
+<?php
+namespace app\modules\models;
+use yii\db\ActiveRecord;
+use Yii;
+class Rbac extends ActiveRecord 
+{
+    //生成复选框
+    public static function getOptions($data, $parent)
+    {
+        $return = [];
+        foreach ($data as $obj) {
+            if (!empty($parent) && $parent->name != $obj->name && Yii::$app->authManager->canAddChild($parent, $obj)) {
+                $return[$obj->name] = $obj->description;
+            }
+            if (is_null($parent)) {
+                $return[$obj->name] = $obj->description;
+            }
+        }
+        return $return;
+    }
+
+    //对某个添加角色与权限
+    public static function addChild($children, $name)
+    {
+        $auth = Yii::$app->authManager;
+        $itemObj = $auth->getRole($name);
+        if (empty($itemObj)) {
+            return false;
+        }
+        $trans = Yii::$app->db->beginTransaction();
+        try {
+            $auth->removeChildren($itemObj);
+            foreach ($children as $item) {
+                $obj = empty($auth->getRole($item)) ? $auth->getPermission($item) : $auth->getRole($item);
+                $auth->addChild($itemObj, $obj);
+            }
+            $trans->commit();
+        } catch(\Exception $e) {
+            $trans->rollback();
+            return false;
+        }
+        return true;
+    }
+}    
+```
+
+**查询sql输出**
+
+manager 角色 分配角色和权限
+
+![](images/assign_role_persion_res.png)
