@@ -383,9 +383,13 @@
 					- [每次访问的验证伪登陆](fn/rbac.md#每次访问的验证伪登陆)
 				- [rbac验证过程](fn/rbac.md#rbac验证过程)
 		- RBAC慕课开发平台 @Jason
+			- [数据库表介绍](fn/rbac/jason/README.md#数据库表介绍)
+			- [基本类介绍](fn/rbac/jason/README.md#基本类介绍)
 			- [配置文件](fn/rbac/jason/README.md#配置文件)
 			- [生成权限表](fn/rbac/jason/README.md#生成权限表)
 			- [创建角色](fn/rbac/jason/README.md#创建角色)
+			- [创建权限列表及分页](fn/rbac/jason/README.md#创建权限列表及分页)
+			- [批量导入控制器的方法入数据库](fn/rbac/jason/README.md#批量导入控制器的方法入数据库)
 		- yii2 admin 分析
 			- [yii2_admin_反射获取action](fn/yii2_admin/README.md#yii2_admin_反射获取action)
 			- 配置_yii2_admin
