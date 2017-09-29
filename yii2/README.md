@@ -394,6 +394,10 @@
 				- [对某角色_分配角色或权限](fn/rbac/jason/README.md#对某角色_分配角色或权限)
 				- [对指定用户_分配角色或权限](fn/rbac/jason/README.md#对指定用户_分配角色或权限)
 			- [全局设置过滤用户是否有权限访问控制器及方法](fn/rbac/jason/README.md#全局设置过滤用户是否有权限访问控制器及方法)
+			- [全局设置插入的记录的时候自动添加admin_id](fn/rbac/jason/README.md#全局设置插入的记录的时候自动添加admin_id)
+			- [授权_角色与权限外_附加自定义规则](fn/rbac/jason/README.md#授权_角色与权限外_附加自定义规则)
+			- [后台栏目个性化_没有权限则过滤](fn/rbac/jason/README.md#后台栏目个性化_没有权限则过滤)
+			- [rbac配置默认权限](fn/rbac/jason/README.md#rbac配置默认权限)
 		- yii2 admin 分析
 			- [yii2_admin_反射获取action](fn/yii2_admin/README.md#yii2_admin_反射获取action)
 			- 配置_yii2_admin

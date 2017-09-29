@@ -645,3 +645,273 @@ class CommonController extends Controller
     }
 }    
 ```
+
+## 全局设置插入的记录的时候自动添加admin_id
+
+[Category.php](https://github.com/408824338/yii2_Jason/blob/master/models/Category.php)
+
+**源代码**  
+
+**yii2_Jason/models/Category.php**
+
+```php
+<?php
+namespace app\models;
+use yii\db\ActiveRecord;
+use Yii;
+use yii\helpers\ArrayHelper;
+use yii\behaviors\BlameableBehavior;
+class Category extends ActiveRecord
+{
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => BlameableBehavior::className(),  
+                'createdByAttribute' => 'adminid', //插入的记录
+                'updatedByAttribute' => null,
+                'value' => Yii::$app->admin->id,  //插入赋值
+            ],
+        ];
+    }
+}    
+```
+
+## 授权_角色与权限外_附加自定义规则
+> 场景:同时是管理员或同级的用户下,权限有删除操作,要求可以删除自己的分类,但不能删除别人的分类   
+
+**源代码**  
+[AuthorRule.php](https://github.com/408824338/yii2_Jason/blob/master/models/AuthorRule.php) 自定义的规则文件  
+[RbacController.php](https://github.com/408824338/yii2_Jason/blob/master/modules/controllers/RbacController.php)  
+[_createrule.php](https://github.com/408824338/yii2_Jason/blob/master/modules/views/rbac/_createrule.php) 视图文件
+
+**yii2_Jason/models/AuthorRule.php**
+
+自定义规则
+
+```php
+<?php
+namespace app\models;
+use yii\rbac\Rule;// execute
+use Yii;
+class AuthorRule extends Rule
+{
+    
+    public $name = "isAuthor";
+    public function execute($user, $item, $params)
+    {
+        $action = Yii::$app->controller->action->id;
+        if ($action == 'delete') {
+            $cateid = Yii::$app->request->get("id");
+            $cate = Category::findOne($cateid);
+            return $cate->adminid == $user;
+        }
+        return true;
+    }
+}
+```
+
+### 添加规则
+
+![](images/add_rules.png)
+
+**yii2_Jason/modules/controllers/RbacController.php**
+
+```php
+<?php
+namespace app\modules\controllers;
+use Yii;
+use \yii\data\ActiveDataProvider;
+use \yii\db\Query;
+use app\modules\models\Rbac;
+class RbacController extends CommonController
+{
+    public $mustlogin = ['createrule', 'createrole', 'roles', 'assignitem'];
+
+    //规则控制器
+    public function actionCreaterule()
+    {
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            if (empty($post['class_name'])) {
+                throw new \Exception('参数错误');
+            }
+            $className = "app\\models\\". $post['class_name'];
+            if (!class_exists($className)) {
+                throw new \Exception('规则类不存在');
+            }
+            $rule = new $className;
+            if (Yii::$app->authManager->add($rule)) {
+                Yii::$app->session->setFlash('info', '添加成功');
+            }
+        }
+        return $this->render("_createrule");
+    }
+
+}  
+
+```
+
+**yii2_Jason/modules/views/rbac/_createrule.php**
+
+```php
+<div class="span9 with-sidebar">
+<div class="container">
+        <?php
+        if (Yii::$app->session->hasFlash('info')) {
+            echo Yii::$app->session->getFlash('info');
+        }
+        $form = ActiveForm::begin([
+            'fieldConfig' => [
+                'template' => '<div class="span12 field-box">{label}{input}</div>{error}',
+            ],
+            'options' => [
+                'class' => 'new_user_form inline-input',
+            ],
+        ]);
+?>
+        <div class="span12 field-box">
+        <?php echo Html::label('类名称', null). Html::textInput('class_name', '', ['class' => 'span9']); ?>
+        </div>
+        
+        <div class="span11 field-box actions">
+            <?php echo Html::submitButton('添加', ['class' => 'btn-glow primary']); ?>
+            <span>OR</span>
+            <?php echo Html::resetButton('取消', ['class' => 'reset']); ?>
+        </div>
+    <?php ActiveForm::end(); ?>
+</div>
+```
+
+**结果显示**
+![](images/add_user.png)
+![](images/role_list_res.png)
+![](images/add_user_res.png)
+![](images/rule_res.png)
+
+
+## 后台栏目个性化_没有权限则过滤
+
+![](images/layout.png)
+
+**源代码** 
+[adminmenu.php](https://github.com/408824338/yii2_Jason/blob/master/config/adminmenu.php) 栏目地址配置文件  
+[web.php](https://github.com/408824338/yii2_Jason/blob/master/config/web.php) 系统配置文件
+[layout1.php](https://github.com/408824338/yii2_Jason/blob/master/modules/views/layouts/layout1.php) 后台layout文件
+
+**yii2_Jason/config/adminmenu.php**
+
+```php
+<?php
+return [
+    ['label' => '后台首页', 'url' => 'default/index', 'module' => 'default', 'icon' => 'icon-home', 'submenu' => []],
+    ['label' => '管理员管理', 'url' => '#', 'module' => 'manage', 'icon' => 'icon-user', 'submenu' => [
+        ['label' => '管理员列表', 'url' => 'managers'],
+        ['label' => '添加管理员', 'url' => 'reg'],
+    ]],
+    ['label' => '用户管理', 'url' => '#', 'module' => 'user', 'icon' => 'icon-group', 'submenu' => [
+        ['label' => '用户列表', 'url' => 'users'],
+        ['label' => '添加用户', 'url' => 'reg'],
+    ]],
+    ['label' => '分类管理', 'url' => '#', 'module' => 'category', 'icon' => 'icon-list', 'submenu' => [
+        ['label' => '分类列表', 'url' => 'list'],
+        ['label' => '添加分类', 'url' => 'add'],
+    ]],
+    ['label' => '商品管理', 'url' => '#', 'module' => 'product', 'icon' => 'icon-glass', 'submenu' => [
+        ['label' => '商品列表', 'url' => 'list'],
+        ['label' => '添加商品', 'url' => 'add'],
+    ]],
+    ['label' => '订单管理', 'url' => '#', 'module' => 'order', 'icon' => 'icon-edit', 'submenu' => [
+        ['label' => '订单列表', 'url' => 'list'],
+    ]],
+    ['label' => '权限管理', 'url' => '#', 'module' => 'rbac', 'icon' => 'icon-group', 'submenu' => [
+        ['label' => '创建角色', 'url' => 'createrole'],
+        ['label' => '角色列表', 'url' => 'roles'],
+        ['label' => '创建规则', 'url' => 'createrule'],
+    ]],
+];
+```
+
+**yii2_Jason/config/web.php**
+加载 "栏目地址配置文件"
+
+```php
+<?php
+$params = require(__DIR__ . '/params.php');
+$adminmenu = require(__DIR__. '/adminmenu.php');
+
+  'params' => array_merge($params, ['adminmenu' => $adminmenu]),
+```
+
+**yii2_Jason/modules/views/layouts/layout1.php**
+
+```php
+<!-- sidebar -->
+<div id="sidebar-nav">
+    <ul id="dashboard-menu">
+
+        <?php
+            $controller = Yii::$app->controller->id;
+            $action = Yii::$app->controller->action->id;
+            foreach (Yii::$app->params['adminmenu'] as $menu) {
+                $show = "hidden";
+                if (Yii::$app->admin->can($menu['module']. '/*')) {
+                    $show = "show";
+                } else {
+                    if (empty($menu['submenu']) && !Yii::$app->admin->can($menu['url'])) {
+                        continue;
+                    } else {
+                        foreach ($menu['submenu'] as $sub) {
+                            if (Yii::$app->admin->can($menu['module']. '/'. $sub['url'])) {
+                                $show = "show";
+                            }
+                        }
+                    }
+                }
+            ?>
+            <li class="<?php echo $controller == $menu['module'] ? 'active' : ''; echo $show; ?>">
+            <a <?php echo !empty($menu['submenu']) ? 'class="dropdown-toggle"' : ''; ?> href="<?php echo $menu['url'] == '#' ? '#' : yii\helpers\Url::to([$menu['url']]); ?>">
+                <i class="<?php echo $menu['icon'] ?>"></i>
+                <span><?php echo $menu['label']; ?></span>
+                <?php if (!empty($menu['submenu'])) : ?>
+                <i class="icon-chevron-down"></i>
+                <?php endif; ?>
+            </a>
+                <ul class="submenu <?php echo $controller == $menu['module'] && !empty($menu['submenu']) ? 'active' : ''; ?>">
+                <?php foreach ($menu['submenu'] as $sub): ?>
+                <?php if (!Yii::$app->admin->can($menu['module']. '/*') && !Yii::$app->admin->can($menu['module']. '/'. $sub['url'])) continue; ?>
+                <li><a href="<?php echo yii\helpers\Url::to([$menu['module']. '/'. $sub['url']]); ?>"><?php echo $sub['label'] ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </li>
+        <?php
+            }
+        ?>
+
+    </ul>
+</div>
+<!-- end sidebar -->
+```
+
+## rbac配置默认权限
+
+**源代码** 
+[web.php](https://github.com/408824338/yii2_Jason/blob/master/config/web.php)
+
+**yii2_Jason/config/web.php**
+
+```php
+ 'components' => [
+ 'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            // auth_item (role permission)
+            // auth_item_child (role->permission)
+            // auth_assignment (user->role)
+            // auth_rule (rule)
+            'itemTable' => '{{%auth_item}}',
+            'itemChildTable' => '{{%auth_item_child}}',
+            'assignmentTable' => '{{%auth_assignment}}',
+            'ruleTable' => '{{%auth_rule}}',
+            'defaultRoles' => ['default'],  //在此设置
+ ]   
+```
