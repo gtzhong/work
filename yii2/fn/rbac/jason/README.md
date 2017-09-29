@@ -305,9 +305,9 @@ class RbacController extends CommonController
 
         //$auth->getRoles() 获取所有的角色
         //$auth->getPermissions() 获取所有的权限
-        $children = Rbac::getChildrenByName($name);  //获取 auth_item_child.parent 等于 $name ,即获取分配的角色或权限列表
-        $roles = Rbac::getOptions($auth->getRoles(), $parent); //获取-角色子节点 (获取未添加)
-        $permissions = Rbac::getOptions($auth->getPermissions(), $parent);//获取-权限子节点 (获取未添加)
+        $children = Rbac::getChildrenByName($name);  //获取自己已选中的角色和权限
+        $roles = Rbac::getOptions($auth->getRoles(), $parent); //获取-所有角色节点
+        $permissions = Rbac::getOptions($auth->getPermissions(), $parent);//获取-所有权限节点
         return $this->render('_assignitem', ['parent' => $name, 'roles' => $roles, 'permissions' => $permissions, 'children' => $children]);
     }
 }    
@@ -436,3 +436,156 @@ class Rbac extends ActiveRecord
 manager 角色 分配角色和权限
 
 ![](images/assign_role_persion_res.png)
+
+
+## 对指定用户_分配角色或权限
+
+![](images/assign_detail_user_role_permission.png)
+
+**源代码**   
+[ManageController.php](https://github.com/408824338/yii2_Jason/blob/master/modules/controllers/ManageController.php)  
+[_assign.php](https://github.com/408824338/yii2_Jason/blob/master/modules/views/manage/_assign.php) 视图文件  
+[Rbac.php](https://github.com/408824338/yii2_Jason/blob/master/modules/models/Rbac.php) model  
+
+**yii2_Jason/modules/controllers/ManageController.php**
+
+```php
+<?php
+namespace app\modules\controllers;
+use yii\web\Controller;
+use Yii;
+use app\modules\models\Admin;
+use yii\data\Pagination;
+use app\modules\controllers\CommonController;
+use app\modules\models\Rbac;
+class ManageController extends CommonController
+{
+    protected $mustlogin = ['assign', 'mailchangepass', 'managers', 'reg', 'del', 'changeemail', 'changepass'];
+
+    //对某个用户进行 角色或权限 的授权
+    public function actionAssign($adminid)
+    {
+        $adminid = (int)$adminid;
+        if (empty($adminid)) {
+            throw new \Exception('参数错误');
+        }
+        $admin = Admin::findOne($adminid);
+        if (empty($admin)) {
+            throw new \yii\web\NotFoundHttpException('admin not found');
+        }
+        if (Yii::$app->request->isPost) {
+            $post = Yii::$app->request->post();
+            $children = !empty($post['children']) ? $post['children'] : [];
+            if (Rbac::grant($adminid, $children)) {
+                Yii::$app->session->setFlash('info', '授权成功');
+            }
+        }
+        $auth = Yii::$app->authManager;
+        $roles = Rbac::getOptions($auth->getRoles(), null); //获取所有的角色
+        $permissions = Rbac::getOptions($auth->getPermissions(), null); //获取所有的权限
+        $children = Rbac::getChildrenByUser($adminid); //获取指定用户ID的已经分配的角色与权限
+        return $this->render('_assign', ['children' => $children, 'roles' => $roles, 'permissions' => $permissions, 'admin' => $admin->adminuser]);
+    }
+
+}    
+```
+
+**yii2_Jason/modules/views/manage/_assign.php**
+
+```php
+<div class="container">
+        <?php
+        if (Yii::$app->session->hasFlash('info')) {
+            echo Yii::$app->session->getFlash('info');
+        }
+        $form = ActiveForm::begin([
+            'fieldConfig' => [
+                'template' => '<div class="span12 field-box">{label}{input}</div>{error}',
+            ],
+            'options' => [
+                'class' => 'new_user_form inline-input',
+            ],
+        ]);
+?>
+        <div class="span12 field-box">
+        <?php echo Html::label('管理员', null). Html::encode($admin); ?>
+        </div>
+        <div class="span12 field-box">
+        <?php echo Html::label('角色', null). Html::checkboxList('children', $children['roles'], $roles); ?>
+        </div>
+        <div class="span12 field-box">
+        <?php echo Html::label('权限', null). Html::checkboxList('children', $children['permissions'], $permissions); ?>
+        </div>
+        
+        <div class="span11 field-box actions">
+            <?php echo Html::submitButton('授权', ['class' => 'btn-glow primary']); ?>
+            <span>OR</span>
+            <?php echo Html::resetButton('取消', ['class' => 'reset']); ?>
+        </div>
+    <?php ActiveForm::end(); ?>
+</div>
+```
+
+**yii2_Jason/modules/models/Rbac.php**
+
+```php
+<?php
+namespace app\modules\models;
+use yii\db\ActiveRecord;
+use Yii;
+class Rbac extends ActiveRecord 
+{
+    /**
+     * 对角色和权限_生成复选框
+     * $data  数据包
+     * $parent  //指定角色的对象 即 auth_item.type = 1 的指定记录
+    */
+    public static function getOptions($data, $parent)
+    {
+        $return = [];
+        foreach ($data as $obj) {
+            if (!empty($parent) && $parent->name != $obj->name && Yii::$app->authManager->canAddChild($parent, $obj)) {
+                $return[$obj->name] = $obj->description;
+            }
+            //对某个用户授权 所增加
+            if (is_null($parent)) {
+                $return[$obj->name] = $obj->description;
+            }
+        }
+        return $return;
+    }    
+
+    /**
+     * 对指定用户分配角色与权限
+     * $adminid  int //user_id
+     * $children obj    //分配的角色与权限
+    */
+    public static function grant($adminid, $children)
+    {
+        $trans = Yii::$app->db->beginTransaction();
+        try {
+            $auth = Yii::$app->authManager;
+            $auth->revokeAll($adminid); //清空该用户之前所分配的角色与权限
+            foreach ($children as $item) {
+                //判断当前是角色还是权限
+                $obj = empty($auth->getRole($item)) ? $auth->getPermission($item) : $auth->getRole($item);
+                $auth->assign($obj, $adminid);
+            }
+            $trans->commit();
+        } catch (\Exception $e) {
+            $trans->rollback();
+            return false;
+        }
+        return true;
+    }    
+
+    //获取指定用户ID的已经分配的角色与权限
+    public static function getChildrenByUser($adminid)
+    {
+        $return = [];
+        $return['roles'] = self::_getItemByUser($adminid, 1);
+        $return['permissions'] = self::_getItemByUser($adminid, 2);
+        return $return;
+    }    
+}    
+```
