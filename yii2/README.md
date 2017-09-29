@@ -393,6 +393,7 @@
 			- 分配角色与权限
 				- [对某角色_分配角色或权限](fn/rbac/jason/README.md#对某角色_分配角色或权限)
 				- [对指定用户_分配角色或权限](fn/rbac/jason/README.md#对指定用户_分配角色或权限)
+			- [全局设置过滤用户是否有权限访问控制器及方法](fn/rbac/jason/README.md#全局设置过滤用户是否有权限访问控制器及方法)
 		- yii2 admin 分析
 			- [yii2_admin_反射获取action](fn/yii2_admin/README.md#yii2_admin_反射获取action)
 			- 配置_yii2_admin

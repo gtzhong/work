@@ -586,6 +586,62 @@ class Rbac extends ActiveRecord
         $return['roles'] = self::_getItemByUser($adminid, 1);
         $return['permissions'] = self::_getItemByUser($adminid, 2);
         return $return;
-    }    
+    }   
+
+   //对上面的进行封装,区分是查分权限还是角色数据的
+    private static function _getItemByUser($adminid, $type)
+    {
+        $func = 'getPermissionsByUser';
+        if ($type == 1) {
+            $func = 'getRolesByUser';
+        }
+        $data = [];
+        $auth = Yii::$app->authManager;
+        $items = $auth->$func($adminid);
+        foreach ($items as $item) {
+            $data[] = $item->name;
+        }
+        return $data;
+    }
+     
+}    
+```
+
+## 全局设置过滤用户是否有权限访问控制器及方法
+
+**源代码**  
+[CommonController.php](https://github.com/408824338/yii2_Jason/blob/master/modules/controllers/CommonController.php)  
+
+** yii2_Jason/modules/controllers/CommonController.php**
+
+```php
+<?php
+namespace app\modules\controllers;
+use yii\web\Controller;
+use Yii;
+class CommonController extends Controller
+{
+    public $layout = 'layout1';
+    protected $actions = ['*'];
+    protected $except = [];
+    protected $mustlogin = [];
+
+    //过滤用户访问方法是否有权限
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        $controller = $action->controller->id;
+        $actionName = $action->id;
+        if (Yii::$app->admin->can($controller. '/*')) {
+            return true;
+        }
+        if (Yii::$app->admin->can($controller. '/'. $actionName)) {
+            return true;
+        }
+        throw new \yii\web\UnauthorizedHttpException('对不起，您没有访问'. $controller. '/'. $actionName. '的权限');
+        // return true;
+    }
 }    
 ```
