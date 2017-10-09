@@ -172,6 +172,9 @@
 		- [事件-简单例子](event.md#简单例子) @白狼栈
 		- [事件-邮件发送](event/event_mail.md) trigger on  @白狼栈
 		- 使用队列redis发送邮件  @Jason
+			- redis队列_左出右进
+			 	- $redis->lrem($this->key, -1, json_encode($message)); //左出
+				- $redis->rpush($mailer->key, json_encode($message));  //右进
 			- [邮件配置信息](event/jason/README.md#邮件配置信息)
 				- [自定义邮件类_使用队列redis发送](event/jason/README.md#自定义邮件类_使用队列redis发送)
 				- [将发送邮件入redis队列去](event/jason/README.md#将发送邮件入redis队列去)
