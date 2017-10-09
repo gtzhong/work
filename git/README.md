@@ -52,6 +52,9 @@
 				- git co -b dev_bak(将当前的分支备份一个)
 				-  [分支创建策略](use.md#分支创建策略)
 				-  [给远程线上仓库指定分支创建标签](use.md#给远程线上仓库指定分支创建标签)
+				-  案例
+					-  如果本地找不到分支,本地 查远程分支是有,比如 hotfix  
+					-  操作: git checkout -t -b hotfix origin/hotfix
 			- 获取
 				- 最新的分支列表  git fetch origin
 				- 远程所有分支 get branch -a 
