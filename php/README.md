@@ -256,4 +256,10 @@
 			- 4.亲测 
 				- 4.1 指定版本 "horse003/yii2-event-demo": "^1.0.2",
 				- 4.2 指定更新 composer update horse003/yii2-event-demo
+	- 上传到composer
+		- 代码上传至github
+		- https://packagist.org 注册并登陆
+		- [composer.json_标准参考文件](fn/composer/README.md#composer.json_标准参考文件)
+		- [packageist设置](fn/composer/packageist设置)
+		- [使用打标签更新代码](fn/composer/README.md#使用打标签更新代码)
 		
