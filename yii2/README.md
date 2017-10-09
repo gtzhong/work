@@ -425,7 +425,14 @@
 				- [使用数组写入规则](fn/yii2_admin/README.md#使用数组写入规则)
 				- [源码分析](fn/yii2_admin/README.md#源码分析)
 	- 配置
-		- [路由设置-伪静态](content.md#路由设置-伪静态) 
+		- url美化
+			- [路由设置-伪静态](content.md#路由设置-伪静态) 
+			- 案例@Jason
+				- [忽略index方法-伪静态](content.md#忽略index方法) 
+				- [分类页伪静态](content.md#分类页伪静态) 
+				- [详情页伪静态](content.md#详情页伪静态) 
+				- [购物车伪静态](content.md#购物车伪静态) 
+				- [后台登陆地址伪静态](content.md#后台登陆地址伪静态) 
 	- 扩展
 		- [自定义扩展](extensions.md#自定义扩展)   猫与老鼠事件
 		- [将别人扩展放入自己的仓库_然后从自己的仓库调用](extensions.md#将别人扩展放入自己的仓库_然后从自己的仓库调用)

@@ -1,5 +1,8 @@
 # 缓存案例
 
+**源代码**
+[CommonController.php](https://github.com/408824338/yii2_Jason/blob/master/controllers/CommonController.php)
+
 ## 栏目分类缓存
 
 ```php
