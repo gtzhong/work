@@ -101,6 +101,11 @@
 					- [表达式](fn/cache_file.md#表达式) ExpressionDependency
 					- [DB](fn/cache_file.md#DB)	DbDependency
 					- [tag](fn/cache_file.md#tag) TagDependency @yii2 admin2 获取栏目地址的缓存
+				- 案例 @Jason
+					- [栏目分类缓存](fn/cache/jason.md#栏目分类缓存)
+					- [购物车缓存_DB依赖](fn/cache/jason.md#购物车缓存_DB依赖)
+					- [对商品做查询缓存](fn/cache/jason.md#对商品做查询缓存)
+					- [session存储到redis](fn/cache/jason.md#session存储到redis)
 			- 页面缓存 [view层]
 				- beginCache 
 					- [缓存时间](fn/cache_file.md#缓存时间)
