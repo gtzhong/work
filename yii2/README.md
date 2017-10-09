@@ -171,6 +171,15 @@
 	- 事件
 		- [事件-简单例子](event.md#简单例子) @白狼栈
 		- [事件-邮件发送](event/event_mail.md) trigger on  @白狼栈
+		- 使用队列redis发送邮件  @Jason
+			- [邮件配置信息](event/jason/README.md#邮件配置信息)
+				- [自定义邮件类_使用队列redis发送](event/jason/README.md#自定义邮件类_使用队列redis发送)
+				- [将发送邮件入redis队列去](event/jason/README.md#将发送邮件入redis队列去)
+			- [注册邮件入队列](event/jason/README.md#注册邮件入队列)
+			- 命令行下触发邮件发送
+				- [console邮件配置信息](event/jason/README.md#console邮件配置信息)
+				- [console执行发送操作](event/jason/README.md#console执行发送操作) ./yii mailer/send
+				- [使用定时任务触邮件发送](event/jason/README.md#使用定时任务触邮件发送)
 		- [猫叫老鼠跑的事件](event/cat_mouse_dog_event.md#猫叫老鼠跑的事件) @withy
 			- 猫添加触发器
 			- 控制器绑定
