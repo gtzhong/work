@@ -102,6 +102,8 @@
 	  - grant all privileges on `*.*` to root@"%";  //允许远程连接
 	  - grant all privileges on `*.*` to 'bitnami'@'%' identified by 'a4f90127b5'; （bitnami 为用户名，a4f90127b5 为密码） 
 	  - FLUSH PRIVILEGES; 
+	- SELECT @@VERSION;  //查看msql版本
+	- SELECT CONNECTION_ID(); //获取当前用户登陆的连接ID
 - 配置文件 my.cnf
 	- 仅允许本地127.0.0.1连接
 		- [mysqld] bind-address=127.0.0.1
@@ -109,6 +111,19 @@
 		- [mysqld] skip_grant_tables
 	-如果"导出"出现问题,有可能是太大了
 		- max_allowed_packet = 500M  
+- 监控Innodb的阻塞 
+```
+SELECT
+b.trx_mysql_thread_id AS '被阻塞线路',
+b.trx_query AS '被阻塞SQL',
+c.trx_mysql_thread_id AS '阻塞线程',
+c.trx_query AS '阻塞SQL',
+(UNIX_TIMESTAMP() - UNIX_TIMESTAMP(c.trx_started)) AS '阻塞时间' 
+FROM information_schema.INNODB_LOCK_WAITS a
+JOIN information_schema.INNODB_TRX b ON a.requesting_trx_id=b.trx_id
+JOIN information_schema.INNODB_TRX c ON a.blocking_trx_id = c.trx_id
+WHERE (UNIX_TIMESTAMP() - UNIX_TIMESTAMP(c.trx_started)) > 60;
+```
 - sqlmap @idaxia
 	- [sqlmap中文注释](fn/sqlmap/sqlmap中文注释.txt)
 	- [python与sqlmap安装](fn/sqlmap/README.md#python与sqlmap安装)
