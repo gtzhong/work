@@ -149,3 +149,23 @@ git clone ssh://admin@192.168.2.92:10022/media/AiDisk_a1/repo/test.git
 
 > tcp协议 10022映射到内网 192.168.8.1的22端口
 ![](images/domain_ngrok.png)
+
+
+# 磁力链接_Transmission配置
+
+## ngrok配置映射
+> http协议 cmktr映射到内网 192.168.8.1的9091端口  
+> 访问以 http://cmktr.ngrok.*.cn即可  
+
+![](images/transmission.png)
+
+
+# aria2配置
+
+## aria2基本配置
+> 挂载的U盘目录download /media/AiDisk_a1/aria/download  
+> 访问地址 
+![](images/Aria2.png)
+
+
+
