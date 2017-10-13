@@ -166,3 +166,7 @@
 			- ss
 				- [ssh开启ss](route/README.md#ssh开启ss)
 				-  [chnroute](route/chnroute.txt) @忽略中国的IP,不经过shadowsocks代理
+		- 使用U盘装Git仓库
+			- [启用opkg及git安装过程](route/README.md#启用opkg及git安装过程)
+			- [新仓库的创建](route/README.md#新仓库的创建)
+			- [获取仓库地址](route/README.md#获取仓库地址)
