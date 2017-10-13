@@ -170,3 +170,4 @@
 			- [启用opkg及git安装过程](route/README.md#启用opkg及git安装过程)
 			- [新仓库的创建](route/README.md#新仓库的创建)
 			- [获取仓库地址](route/README.md#获取仓库地址)
+			- [外网域名访问仓库ngrok设置](route/README.md#外网域名访问仓库ngrok设置)

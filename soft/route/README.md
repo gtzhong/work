@@ -144,3 +144,8 @@ git clone ssh://admin@192.168.2.92:10022/media/AiDisk_a1/repo/test.git
 **路由器防火墙的配置**
 
 ![](images/ssh_set_iptables.png)
+
+## 外网域名访问仓库ngrok设置
+
+> tcp协议 10022映射到内网 192.168.8.1的22端口
+![](images/domain_ngrok.png)
