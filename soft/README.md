@@ -166,3 +166,14 @@
 			- ss
 				- [ssh开启ss](route/README.md#ssh开启ss)
 				-  [chnroute](route/chnroute.txt) @忽略中国的IP,不经过shadowsocks代理
+		- 使用U盘装Git仓库
+			- [启用opkg及git安装过程](route/README.md#启用opkg及git安装过程)
+			- [新仓库的创建](route/README.md#新仓库的创建)
+			- [获取仓库地址](route/README.md#获取仓库地址)
+			- [外网域名访问仓库ngrok设置](route/README.md#外网域名访问仓库ngrok设置)
+		- 磁力链接_Transmission配置
+			- 挂载的U盘目录 创建一个transmission 目录
+			- [ngrok配置映射](route/README.md#ngrok配置映射)
+		- aria2配置
+			- 挂载的U盘目录 创建一个aria 目录
+			- aria2基本配置
