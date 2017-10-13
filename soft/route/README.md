@@ -148,6 +148,7 @@ git clone ssh://admin@192.168.2.92:10022/media/AiDisk_a1/repo/test.git
 ## 外网域名访问仓库ngrok设置
 
 > tcp协议 10022映射到内网 192.168.8.1的22端口
+> 使用ssh git clone ssh://admin@vdinggit.ngrok.*.cn:10022/media/AiDisk_a1/repo/test.git   
 ![](images/domain_ngrok.png)
 
 
