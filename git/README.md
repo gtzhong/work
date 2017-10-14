@@ -142,6 +142,11 @@
 				- [发布到线上及使用标签回滚](example.md#发布到线上及使用标签回滚)  tag reset
 			- 本地包含多个仓库的操作
 				- [给远程线上仓库指定分支创建标签](use.md#给远程线上仓库指定分支创建标签)
+		- 使用U盘装Git仓库
+			- [启用opkg及git安装过程](../soft/route/README.md#启用opkg及git安装过程)
+			- [新仓库的创建](../soft/route/README.md#新仓库的创建)
+			- [获取仓库地址](../soft/route/README.md#获取仓库地址)
+			- [外网域名访问仓库ngrok设置](../soft/route/README.md#外网域名访问仓库ngrok设置)		
 	- 问题
 		- [测试推向正式服错](question.md#测试推向正式服错)  git push prod anyang
 		- [composer_sms_报错误](question.md#composer_sms_报错误)
