@@ -45,6 +45,61 @@ Yii::error('testtest','myTest');
 ![](images/log_content.png)
 
 
+# 使用sentry收集错误log
+
+## sentry安装
+
+[yii2-sentry官方安装](https://github.com/hellowearemito/yii2-sentry)
+
+```
+php composer.phar require --prefer-dist mito/yii2-sentry "~1.0.0"
+
+"mito/yii2-sentry": "~1.0.0"
+```
+
+## sentry配置
+
+```php
+    'components' => [
+
+        'sentry' => [
+            'class' => 'mito\sentry\Component',
+            'dsn' => 'YOUR-PRIVATE-DSN', // private DSN
+            'environment' => 'staging', // if not set, the default is `production`
+            'jsNotifier' => true, // to collect JS errors. Default value is `false`
+            'jsOptions' => [ // raven-js config parameter
+                'whitelistUrls' => [ // collect JS errors from these urls
+                    'http://staging.my-product.com',
+                    'https://my-product.com',
+                ],
+            ],
+        ],
+        'log' => [
+            'targets' => [
+                [
+                    'class' => 'mito\sentry\Target',
+                    'levels' => ['error', 'warning'],
+                    'except' => [
+                        'yii\web\HttpException:404',
+                    ],
+                ],
+            ],
+        ],
+
+    ],
+```
+
+## sentry操作
+
+```php
+Yii::error('testtest','myTest');
+```
+
+**截图展示**
+
+![](images/sentry_list.png)
+
+![](images/sentry_detail.png)
 
 
 # logreader
