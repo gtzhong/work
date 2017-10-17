@@ -141,7 +141,7 @@
 			- netstat -tunpl
 	- ssh
 		- ssh 202.104.102.444 -p 5804  //远程登陆
-	- 防火墙
+	- 防火墙 iptables
 		- 设置
 			``` 
 			 vim /etc/sysconfig/iptables
@@ -149,6 +149,12 @@
 			```
 		- 查看
 			- iptables -L -n
+		- 命令行下
+			- iptables -I INPUT 4 -p tcp  -m state --state NEW -m tcp --dport 6868 -j ACCEPT // 添加tcp指定端口
+			- iptables -I INPUT 4 -p udp  -m state --state NEW -m udp --dport 6868 -j ACCEPT // 添加udp指定端口
+			- iptables -A INPUT -p udp --dport 443 -j ACCEPT //添加udp指定端口
+			- iptables -A INPUT -p tcp --dport 443 -j ACCEPT //添加tcp指定端口
+			- service iptables save	 //保存
 	- 更新linux时间
 		- 方法1 [手动修改指定的时间]
 			``` 
