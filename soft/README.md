@@ -171,6 +171,12 @@
 			- [新仓库的创建](route/README.md#新仓库的创建)
 			- [获取仓库地址](route/README.md#获取仓库地址)
 			- [外网域名访问仓库ngrok设置](route/README.md#外网域名访问仓库ngrok设置)
+		- 使用u盘装mysql
+			- opkg install mysql-server 
+			- mysql_install_db --force  //创建默认的数据库
+			- /opt/etc/init.d/S70mysqld restart
+			- /opt/bin/mysqladmin password desired_mysql_password
+			- mysql -u root -p
 		- 磁力链接_Transmission配置
 			- 挂载的U盘目录 创建一个transmission 目录
 			- [ngrok配置映射](route/README.md#ngrok配置映射)
