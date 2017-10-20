@@ -164,12 +164,20 @@
 			- yii\web\TooManyRequestsHttpException
 	- 日志
 		- 存储 
-			- Yii::getLogger()->log($message, $level, $category = 'application')
-			- Yii::trace($message, $category = 'application');
-			- Yii::error($message, $category = 'application');
-			- Yii::warning($message, $category = 'application');
-			- Yii::info($message, $category = 'application');
-				- 如 Yii::info($log,__METHOD__);
+			- 常用
+				- Yii::getLogger()->log($message, $level, $category = 'application')
+				- Yii::trace($message, $category = 'application');
+				- Yii::error($message, $category = 'application');
+				- Yii::warning($message, $category = 'application');
+				- Yii::info($message, $category = 'application');
+					- 如 Yii::info($log,__METHOD__);
+			- 自定义监控的错误类型与过滤多余日志信息  @Jason
+				- [自定义log配置](fn/log.md#自定义log配置)
+				- [操作记录入库](fn/log.md#操作记录入库)
+			- 使用sentry收集错误log @Jason
+				- [sentry安装](fn/log.md#sentry安装)
+				- [sentry配置](fn/log.md#sentry配置)
+				- [sentry操作](fn/log.md#sentry操作)
 		- logreader 后台查看日志 第三方插件 
 			- [logreader配置](fn/log.md#logreader配置)
 			- [logreader使用](fn/log.md#logreader使用)
