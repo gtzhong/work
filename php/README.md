@@ -113,6 +113,10 @@
 				- [socket整理](socket.md#socket整理) 
 				- [查询](socket/s1.php) 
 				- [分账](socket/c1.php)
+		- 案例
+			- 旅游分销API接口
+				- [众信的对接接口](http://agent.utourworld.com/loadApiWeb) 使用报文形式发送
+					- [众信系统对接说明](socket/众信系统接口对接流程说明-171025.docx) 
 	- rsa
 		- [php_rsa](fn/rsa/rsa_php_source/php_rsa.php)
 		- [模拟登陆_vding](../yii2/vding_api.md#模拟登陆_vding) //其它系统获取登陆token
