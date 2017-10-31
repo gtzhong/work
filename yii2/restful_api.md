@@ -154,6 +154,56 @@ public function actionCkdriver(){
     }	
 ```
 
+## 公司注册例子BadRequestHttpException
+
+**rest/versions/v1/controllers/UserController.php**
+
+```php
+public function actionRegisterComp()
+    {
+        $curUserId = Yii::$app->user->getId();
+        $user = User::findOne($curUserId);
+        //查找接口公司
+        $curComp = Company::findOne(['user_id' => $curUserId, 'is_partner' => 1]);
+        //除登录权限外，还要额外检测合作者身份，不是合作者不允许调用此接口
+        if (1 != $user->is_partner) {
+            throw new BadRequestHttpException('not partner.');
+        }
+        if (!$curComp) {
+            throw new BadRequestHttpException('partner company not found.');
+        }
+        $model = new SignupForm();
+        $model->setScenario(SignupForm::SCENARIO_CREATE_COMP);
+        if ($model->load(Yii::$app->request->post(), '')) {
+            try {
+                $model->user_type = User::USER_TYPE_COMPANY;
+                $model->reference_id = $curUserId;
+                $model->from_company_id = $curComp->id;
+                $user = $model->signupComp();
+                if ($user) {
+                    unset($user->email, $user->password_hash, $user->auth_key, $user->pay_auth_key, $user->pay_pwd_hash, $user->reference_id, $user->logged_at);
+                    $user->access_token = strtoupper(bin2hex(Yii::$app->rsa->privateEncrypt($user->access_token)));
+                    return [
+                        'id' => $user->id,
+                        'username' => $user->username,
+                        'mobile' => $user->mobile,
+                        'status' => $user->status,
+                        'user_type' => $user->user_type,
+                        'access_token' => $user->access_token,
+                        'company_id' => $user->companyInfo->id,
+                    ];
+                } else {
+                    $err = current(array_values($model->getFirstErrors()));
+                    throw new BadRequestHttpException($err);
+                }
+            } catch (\Exception $e) {
+                throw new BadRequestHttpException($e->getMessage());
+            }
+        }
+        throw new BadRequestHttpException('bad request.');
+    }
+```
+
 ## api分页效果
 
 ```php

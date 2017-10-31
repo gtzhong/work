@@ -450,6 +450,7 @@
 			- [使用自带与个性化_syg](restful_api.md#使用自带与个性化_syg) 
 		- controller
 			- [方法使用_事务_trycatch_badrequesthttpexception_servererrorhttpexception](restful_api.md#方法使用_事务_trycatch_badrequesthttpexception_servererrorhttpexception) 
+			- [公司注册例子BadRequestHttpException](restful_api.md#公司注册例子BadRequestHttpException) @zb
 			- [api分页效果](restful_api.md#api分页效果) 
 
 - 疑问
