@@ -25,6 +25,10 @@
 			- SELECT INET_NTOA(3232236042) //192.168.2.10   //将数字转化为IP
 	- 优化
 		- [普通及高级查询的优化](fn/select.md#查询的优化) select (select)  @sqlercn 
+		- 慢查询
+			- [启用mysql慢查询](fn/optimize.md#启用mysql慢查询) 捕获有问题的sql
+			- [慢查日志记录的内容](fn/optimize.md#慢查日志记录的内容)
+			- [如何分析慢查日志](fn/optimize.md#如何分析慢查日志)
 	- SQL设计开发规范 @sqlercn 
 		- 非负数的字段尽量使用无符号整形
 		- 避免使用TEXT,BLOG和ENUM类型
