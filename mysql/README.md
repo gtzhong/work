@@ -23,6 +23,8 @@
 		- 将字符串转化为数字类型存储
 			- SELECT INET_ATON('192.168.2.10')  //输出 3232236042  //将IP转化为数字
 			- SELECT INET_NTOA(3232236042) //192.168.2.10   //将数字转化为IP
+	- 优化
+		- [普通及高级查询的优化](fn/select.md#查询的优化) select (select)  @sqlercn 
 	- SQL设计开发规范 @sqlercn 
 		- 非负数的字段尽量使用无符号整形
 		- 避免使用TEXT,BLOG和ENUM类型
