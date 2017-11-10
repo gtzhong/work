@@ -20,6 +20,54 @@
 				- 无符号整数 : UNSIGNED
 			- 举例
 				- select cast(‘125e342.83’ as signed) as clm1		//转换正型
+		- 将字符串转化为数字类型存储
+			- SELECT INET_ATON('192.168.2.10')  //输出 3232236042  //将IP转化为数字
+			- SELECT INET_NTOA(3232236042) //192.168.2.10   //将数字转化为IP
+	- 优化
+		- [普通及高级查询的优化](fn/select.md#查询的优化) select (select)  @sqlercn 
+		- 慢查询
+			- [启用mysql慢查询](fn/optimize.md#启用mysql慢查询) 捕获有问题的sql
+			- [慢查日志记录的内容](fn/optimize.md#慢查日志记录的内容)
+			- [如何分析慢查日志](fn/optimize.md#如何分析慢查日志)
+	- SQL设计开发规范 @sqlercn 
+		- 非负数的字段尽量使用无符号整形
+		- 避免使用TEXT,BLOG和ENUM类型
+		- 尽可能把所有列定义为NOT NULL
+		- 使用TIMESTAMP或DATETIME类型存储时间
+		- 金融类数据,必须使用decimal类型
+		- 避免使用双%号查询条件,如 %123% . 使用后置 正确使用 123%
+		- 一个SQL只能利用到复合索引中的一列进行范围查询 如 a b c 做为复合索引,a列是做范围查询的,则应该放在右侧
+		- 使用left join 或 no exists来优化 not in操作
+		- 程序连接不同的数据库使用不同的帐号,禁止跨库查询
+		- 禁止使用不含字段列表的insert语句
+			- insert into t values('a','b','c')  不建议
+			- insert into t(c1,c2,c3) values('a','b','c') 推荐做法
+		- 避免使用子查询,可以把子查询优化为join操作
+		- 避免使用JOIN关联太多的表 Mysql最多允许关联61个表,建议不超过5个 
+		- 使用in 代替 or
+			- in的值不要超过500个
+			- in操作可以有效利用索引
+		- 禁止使用 order by rand() 进行随机排序
+		- where 从句中禁止对列进行函数转换和计算(会导致无法使用索引)
+			- where date(createtime) = '20160901'  不建议
+			- where dcreatetime >= '20160901'  and createtime < '20160902'
+		- 在明显不会有重复值时使用UNION ALL 而不是UNION
+			- UNION会把所有数据放到临时表中再进行去操操作
+			- UNION ALL不会再对结果集进行去重操作
+		- 拆分复杂的大SQL为多个小SQL
+			- 一个SQL只能使用一个CPU进行计算
+			- SQL拆分后可能通过并行执行来提高处理效率
+	- SQL操作行为规范
+		- 超100万行的批量写操作,要分批多次进行操作
+		- 对于大表使用 pt-online-schema-change 修改表结构
+			- 避免大表修改产生的主从延迟
+			- 避免在对表字段进行修改时进行锁表
+		- 禁止为程序使用帐号赋予super权限
+			- 当达到最大连接数限制时,还允许1个有super权限的用户连接
+			- super权限只能留给DBA处理问题的帐号使用
+		- 对于程序连接数据库帐号,遵循权限最小原则 
+			- 程序使用数据库帐号只能在一个DB下使用,不准跨库
+			- 程序使用的账号原则上不准有drop权限
 	- 批量查询表的记录数量
 		- use information_schema
 
