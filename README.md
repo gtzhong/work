@@ -9,7 +9,7 @@
     - [linux](linux/)
 	- [mysql](mysql/)
 	- [git](git/)
-	- [python](python/)
+	- [python](python/README.md)
 	- [c](c/)
 - Other
 	- [en](en/)
