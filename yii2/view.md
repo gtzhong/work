@@ -1,4 +1,4 @@
-##输入框选择日期
+## 输入框选择日期
 ![](view/input_select_date.png)
 
 ```php
@@ -12,7 +12,7 @@
         ) ?>
 ```
 
-##时间字段年月日显示
+## 时间字段年月日显示
 ![](view/date_format.png)
 ```php
 [  
@@ -25,25 +25,25 @@
 ],  
 ```
 
-#时间区间范围的选择
+# 时间区间范围的选择
 ![](view/1.DateRangePicker_date_select.png)
 >[官方](http://demos.krajee.com/date-range)   
->[composer安装](#安装)    
+>[composer安装](#安装)      
 
-<br />
 
 >使用  
 >[model设置](#model设置)  
 >[view设置](#列表页设置)  
 
 
-##安装
+## 安装
 ```
 加入composer.json
 "kartik-v/yii2-date-range": "*"
  php composer update
 ```
-##model设置
+
+## model设置
 ```php
   class UserSearchextendsUser{
 	// 1.定义一个变量先
@@ -82,8 +82,9 @@
 
 ```
 
-##列表页设置 
-index.php
+## 列表页设置 
+
+**index.php**
 
 ```php
 //1定义类
@@ -132,7 +133,8 @@ use kartik\daterange\DateRangePicker;
 
 
 
-##自定义列表页_按纽模板
+## 自定义列表页_按纽模板
+
 ```php
 ['class' => 'yii\grid\ActionColumn', 'template' => '{view}', 'header' => '操作',
     'buttons' => [
@@ -150,9 +152,10 @@ use kartik\daterange\DateRangePicker;
 ],
 
 ```
-##自定义列表页_按纽模板_增加判断
+## 自定义列表页_按纽模板_增加判断
+
 ![](view/index_button_isif.png)
->注：删除的按纽要加一些参数，因为它是post提交
+>注：删除的按纽要加一些参数，因为它是post提交   
 
 ```php
 ['class' => 'yii\grid\ActionColumn', 'template' => '{update}{view}{delete}', 'header' => '操作',
@@ -199,7 +202,7 @@ use kartik\daterange\DateRangePicker;
 
 ```
 
-##自定义列表页_按纽模板_增加判断_小明
+## 自定义列表页_按纽模板_增加判断_小明    
 
 ```php
 
@@ -229,8 +232,9 @@ use kartik\daterange\DateRangePicker;
 ]
 ```
 
-#URL地址生成
-##url_to
+# URL地址生成
+## url_to
+
 ```php
 <a href="<?php echo yii\helpers\url::to(['public/logout']) ?>"></a> 
 
@@ -240,12 +244,14 @@ use kartik\daterange\DateRangePicker;
 <a href="<?php echo yii\helpers\Url::to(['category/mod', 'cateid' => $cate['cateid']]); ?>">编辑</a> #带参数 
 ```
 
-##html_a
+## html_a
+
 ```php
 <?php echo Html::a('确认发货', ['order/confirm','id'=>$_GET['id']], ['class' => 'button_submit', 'data-confirm' => '确认已发货？']) ?>
 ```
 
-##列表页_自定义编号_删除
+## 列表页_自定义编号_删除
+
 ![](view/view_number.png)
 ```php
   <?php echo GridView::widget([
