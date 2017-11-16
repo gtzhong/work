@@ -3,6 +3,153 @@
 # 基本类型
  
 ## 整型与浮点型
+> 3.0以后 仅有 整型:int 浮点型:flost
+
+```python
+>>> type(1)
+<class 'int'>
+>>> type(1.1)
+<class 'float'>
+>>> type(1.988239827398273)
+<class 'float'>
+>>> 1+0.1
+1.1
+>>> type(1+0.1)
+<class 'float'>
+>>> type(1+1)
+<class 'int'>
+>>> 
+
+>>> type(1*1)
+<class 'int'>
+>>> type(1*1.0)
+<class 'float'>
+>>> type(2/2)
+<class 'float'>
+>>> type(2//2)  // 双//强制转换为整型
+<class 'int'>
+
+>>> 2/2
+1.0
+>>> 2//2
+1
+>>> 1//2
+0
+```
+
+## 10,2,8,16进制及转换
+
+```python
+>>> 0b10  #二进制转十进制
+2
+>>> 0b11
+3
+>>> 0o11  #八进制转十进制
+9
+>>> 0x10
+16
+>>> 0x1f  #十六进制转十进制
+31
+>>> 11   #默认十进制
+11
+
+>>> bin(10) #十进制转二进制
+'0b1010'
+>>> bin(0o7) #八进制转二进制
+'0b111'
+>>> bin(0xE) #十六进制转二进制
+'0b1110'
+>>> 
+>>> int(0b1010) #二进制转十进制
+10
+>>> int(0o11) #八进制转十进制
+9
+>>> int(0x1f) #十六进制转十进制
+31
+>>> 
+>>> hex(0o7777) #八进制转十六进制
+'0xfff'
+>>> hex(888) #十进制转十六进制
+'0x378'
+>>> 
+>>> oct(0b111) #二进制转八进制
+'0o7'
+>>> oct(0x777) #十六进制转八进制
+'0o3567'
+
+```
+## 布尔与复数
+
+```python
+>>> type(True)
+<class 'bool'>
+>>> type(False)
+<class 'bool'>
+>>> int(True)
+1
+>>> int(False)
+0
+>>> bool(1)
+True
+>>> bool(0)
+False
+>>> bool(-1)
+True
+>>> bool(2)
+True
+>>> bool(2.2)
+True
+>>> bool(0b01)
+True
+>>> bool(0b0)
+False
+>>> bool('abc')
+True
+>>> bool('')
+False
+>>> bool([1,2,3])
+True
+>>> bool([])
+False
+>>> bool({1,1,1})
+True
+>>> bool({})
+False
+>>> bool(None)
+False
+```
+
+# 字符串
+
+## 单引号与双引号
+```python
+>>> 1
+1
+>>> 2
+2
+>>> 'hello world'
+'hello world'
+>>> "Hello World"
+'Hello World'
+>>> 1
+1
+>>> '1'
+'1'
+>>> type(1)
+<class 'int'>
+>>> type('1')
+<class 'str'>
+>>> 
+>>> 'let's go'
+SyntaxError: invalid syntax
+>>> "left 's go"
+"left 's go"
+>>> 'left "s go'
+'left "s go'
+>>> 'left\'s go'  #转义字符
+"left's go"
+>>> 
+```
 
 
 # 条件控制
