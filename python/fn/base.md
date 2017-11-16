@@ -122,6 +122,7 @@ False
 # 字符串
 
 ## 单引号与双引号
+
 ```python
 >>> 1
 1
@@ -151,6 +152,145 @@ SyntaxError: invalid syntax
 >>> 
 ```
 
+## 多行字符串
+
+```python
+>>> '''
+hello world
+hello world
+hello world
+'''
+'\nhello world\nhello world\nhello world\n'
+>>> 
+>>> """
+hello world
+hello world
+hello world
+"""
+'\nhello world\nhello world\nhello world\n'
+>>> 
+>>> "hellow world hello world hello world"
+'hellow world hello world hello world'
+>>> 
+>>> print("""hello world\n hello world\n hello world""")
+hello world
+ hello world
+ hello world
+>>> 
+>>> print('''hello world\n hello world\n hello wolrd''')
+hello world
+ hello world
+ hello wolrd
+>>> 
+>>> print("hello world\nhello world\nhello world")
+hello world
+hello world
+hello world
+>>> 
+>>> 'hello\
+world'
+'helloworld'
+```
+
+## 转义字符
+> 无法"看见"的字符  
+> 与语言本身语法有冲突的字符   
+
+
+符号 | 描述 
+---------|----------
+\n | 换行
+\\' | 单引号
+\t | 横向制表符
+\r | 回车
+
+## 原始字符串
+
+```python
+>>> print('hello \n world')
+hello 
+ world
+>>> 'hello \n world'
+'hello \n world'
+>>> 
+>>> print('hello \\n world')
+hello \n world
+>>> 'left \'s go'
+"left 's go"
+>>> print('c:\northwind\northest')
+c:
+orthwind
+orthest
+>>> print('c:\\northwind\\northest')  #方法1 使用转义符输出
+c:\northwind\northest
+>>> 
+>>> print(r'c:\northwind\northest')  #方法2 使用r表示输出,不是一个普通字符串,而是一个原始字符串
+c:\northwind\northest
+>>> 
+```
+
+## 字符串运算
+
+```python
+>>> 1+1
+2
+>>> 2*2
+4
+>>> "hello"+"world"
+'helloworld'
+>>> "hello"*3  # 该字符串输出3次
+'hellohellohello'
+>>> "hello"*"world" # 字符串不能乘以字符串
+Traceback (most recent call last):
+  File "<pyshell#4>", line 1, in <module>
+    "hello"*"world"
+TypeError: can't multiply sequence by non-int of type 'str'
+>>> 
+>>> "hello world"[0]
+'h'
+>>> "hello world"[3]
+'l'
+>>> "hello world"[4]
+'o'
+>>> "hello world"[-1] #获取最后一个字符
+'d'
+>>> "hello world"[-3] #负数,从右边开始数,第三个
+'r'
+>>> 
+>>> "hello world"[0:4] #字长,0表示从左边开始算4个字符串
+'hell'
+>>> "hello world"[0:-1] #从左边到右边,截至-1个止
+'hello worl'
+>>> "hello world"[0:-3]
+'hello wo'
+
+>>> "hello world"[6:10]
+'worl'
+>>> "hello world"[6:20]
+'world'
+>>> "hello world"[6:-1]
+'worl'
+>>> "hello world"[6:-2]
+'wor'
+>>> "hello world"[6:0]
+''
+>>> "hello world"[6:-0]
+''
+>>> "hello world"[6:]  # 截取 从左边第6个字符开始到结束
+'world'
+>>> 
+>>> "hello python java c# javascript php ruby"[6:]
+'python java c# javascript php ruby'
+>>> "hello python java c# javascript php ruby"[:-4]
+'hello python java c# javascript php '
+>>> "hello python java c# javascript php ruby"[-4:] #从右边数4个,然后取全部
+'ruby'
+
+>>> r'C:\windows'  #原始字符串
+'C:\\windows'
+>>> R'c:\windows'
+'c:\\windows'
+```
 
 # 条件控制
 
