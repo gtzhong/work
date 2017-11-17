@@ -13,20 +13,20 @@
 		- [转义字符](fn/base.md#转义字符) 
 		- [原始字符串](fn/base.md#原始字符串) 
 		- [字符串运算](fn/base.md#字符串运算) 
-- 组概念与定义 @七月
-	- 列表
-	- 元组
-	- 序列
-	- set集合
-	- dict字典
-- 变量与运算符 @七月
-	- 可变与不可变
-	- 赋值运算符
-	- 关系运算符
-	- 逻辑运算符
-	- 成员运算符
-	- 身份运算符
-	- 位运算符
+	- 组概念与定义
+		- [列表](fn/base.md#列表) []表示  看作数组
+		- [元组](fn/base.md#元组) ()表示
+		- [序列总结](fn/base.md#序列总结)
+		- [set集合](fn/base.md#set集合) 无序 {}表示
+		- [dict字典](fn/base.md#dict字典) key/value {key1:value1,key2:value2...}
+	- 变量与运算符
+		- 可变与不可变
+		- 赋值运算符
+		- 关系运算符
+		- 逻辑运算符
+		- 成员运算符
+		- 身份运算符
+		- 位运算符
 - 条件控制
 	- [if/elif](fn/base.md#if/elif) 
 	- [try/except/while](fn/base.md#try/except/while)  

@@ -1,6 +1,8 @@
 # 基础
 
 # 基本类型
+
+![](images/base.png)
  
 ## 整型与浮点型
 > 3.0以后 仅有 整型:int 浮点型:flost
@@ -291,6 +293,184 @@ TypeError: can't multiply sequence by non-int of type 'str'
 >>> R'c:\windows'
 'c:\\windows'
 ```
+
+## 列表 
+
+```python
+>>> type([1,2,3,4,56])
+<class 'list'>
+>>> type(['helo','world',1,9])
+<class 'list'>
+>>> type(['hello','world',1,9,True,False])
+<class 'list'>
+>>> type([[1,2],[3,4],[True,False]])
+<class 'list'>
+
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺'][0]  #获取指定数据
+'新月打击'
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺'][3]
+'月神冲刺'
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺'][0:2]
+['新月打击', '苍白之爆']
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺'][-1:]
+['月神冲刺']
+>>> 
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺']+['点燃','虚弱']  # 再添加数据
+['新月打击', '苍白之爆', '月之降临', '月神冲刺', '点燃', '虚弱']
+>>> ['点燃','虚弱']*2  #获取多份数据
+['点燃', '虚弱', '点燃', '虚弱']
+>>> ['点燃','虚弱']*['点燃','虚弱']  #列表是不能相乘
+Traceback (most recent call last):
+  File "<pyshell#13>", line 1, in <module>
+    ['点燃','虚弱']*['点燃','虚弱']
+TypeError: can't multiply sequence by non-int of type 'list'
+```
+
+## 元组
+
+```python
+>>> (1,2,3,4,5)
+(1, 2, 3, 4, 5)
+>>> (1,'-1',True)
+(1, '-1', True)
+>>> (1,2,3,4)[0]
+1
+>>> (1,2,3,4)[0:2]
+(1, 2)
+>>> (1,2,3)+(4,5,6)
+(1, 2, 3, 4, 5, 6)
+>>> (1,2,3)*3
+(1, 2, 3, 1, 2, 3, 1, 2, 3)
+>>> 
+>>> type((1,2,3))
+<class 'tuple'>
+>>> type(1)
+<class 'int'>
+>>> type([1,2,3])
+<class 'list'>
+>>> type('hello')
+<class 'str'>
+
+>>> type((1,))
+<class 'tuple'>
+>>> type(())
+<class 'tuple'>
+
+```
+
+## 序列总结
+
+```python
+>>> int,float,bool,str,list,tuple
+(<class 'int'>, <class 'float'>, <class 'bool'>, <class 'str'>, <class 'list'>, <class 'tuple'>)
+>>> 'hello world'[2]
+'l'
+>>> [1,2,3][2]
+3
+>>> 3 in [1,2,3,4]
+True
+>>> 10 in [1,2,3,4]
+False
+>>> 3 not in [1,2,3,4]
+False
+
+>>> len([1,2,3,4,5,6])
+6
+>>> len('hello world')
+11
+>>> max([1,2,3,4,5,6])
+6
+>>> min([1,2,3,4,5,6])
+1
+>>> max('hello world')
+'w'
+>>> min('hello world')
+' '
+>>> min('helloworld')
+'d'
+
+>>> 'hello world'
+'hello world'
+>>> ord('w')
+119
+>>> ord('d')
+100
+>>> ord(' ')
+32
+```
+
+## set集合
+
+```python
+>>> type({1,2,3,4,5})
+<class 'set'>
+>>> {1,2,3,4}[0]
+Traceback (most recent call last):
+  File "<pyshell#1>", line 1, in <module>
+    {1,2,3,4}[0]
+TypeError: 'set' object does not support indexing
+>>> {1,2,3,4,5}[0:2]
+Traceback (most recent call last):
+  File "<pyshell#2>", line 1, in <module>
+    {1,2,3,4,5}[0:2]
+TypeError: 'set' object is not subscriptable
+>>> {11,2,2,2,3,3,4,4}  # 集合的第二特殊:不重复
+{3, 2, 11, 4}
+
+>>> len({1,2,3})
+3
+>>> 1 in {1,2,3}
+True
+>>> 1 not in {1,2,3}
+False
+>>> [1,2,3][0]
+1
+>>> {1,2,3,4,5,6}-{3,4} #求两个集合的的差集
+{1, 2, 5, 6}
+>>> {1,2,3,4,5,6} & {3,4} #交集
+{3, 4}
+>>> {1,2,3,4,5,6} | {3,4,7} #合集
+{1, 2, 3, 4, 5, 6, 7}
+
+>>> type({})
+<class 'dict'>
+>>> type(set())
+<class 'set'>
+>>> len(set())
+0
+```
+
+## dict字典
+> 很多个key和value,集合类型(set),序列  
+> key:必须是不可变的类型  
+
+```python
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}[0]
+Traceback (most recent call last):
+  File "<pyshell#0>", line 1, in <module>
+    {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}[0]
+KeyError: 0
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}['Q']
+'新月打击'
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}['R']
+'月神冲刺'
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}['Q']
+'新月打击'
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}
+{'Q': '新月打击', 'W': '苍白之爆', 'E': '月之降临', 'R': '月神冲刺'}
+>>> {1:'新月打击','1':'苍白之爆','E':'月之降临','R':'月神冲刺'}
+{1: '新月打击', '1': '苍白之爆', 'E': '月之降临', 'R': '月神冲刺'}
+>>> type({1:'新月打击','1':'苍白之爆','E':'月之降临','R':'月神冲刺'})
+<class 'dict'>
+>>> {[1,2]:'新月打击','1':'苍白之爆','E':'月之降临','R':'月神冲刺'}  # key:必须是不可变的类型
+Traceback (most recent call last):
+  File "<pyshell#7>", line 1, in <module>
+    {[1,2]:'新月打击','1':'苍白之爆','E':'月之降临','R':'月神冲刺'}
+TypeError: unhashable type: 'list'
+>>> type({})
+<class 'dict'>
+```
+
 
 # 条件控制
 
