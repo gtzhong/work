@@ -1,8 +1,475 @@
 # 基础
 
 # 基本类型
+
+![](images/base.png)
  
 ## 整型与浮点型
+> 3.0以后 仅有 整型:int 浮点型:flost
+
+```python
+>>> type(1)
+<class 'int'>
+>>> type(1.1)
+<class 'float'>
+>>> type(1.988239827398273)
+<class 'float'>
+>>> 1+0.1
+1.1
+>>> type(1+0.1)
+<class 'float'>
+>>> type(1+1)
+<class 'int'>
+>>> 
+
+>>> type(1*1)
+<class 'int'>
+>>> type(1*1.0)
+<class 'float'>
+>>> type(2/2)
+<class 'float'>
+>>> type(2//2)  // 双//强制转换为整型
+<class 'int'>
+
+>>> 2/2
+1.0
+>>> 2//2
+1
+>>> 1//2
+0
+```
+
+## 10,2,8,16进制及转换
+
+```python
+>>> 0b10  #二进制转十进制
+2
+>>> 0b11
+3
+>>> 0o11  #八进制转十进制
+9
+>>> 0x10
+16
+>>> 0x1f  #十六进制转十进制
+31
+>>> 11   #默认十进制
+11
+
+>>> bin(10) #十进制转二进制
+'0b1010'
+>>> bin(0o7) #八进制转二进制
+'0b111'
+>>> bin(0xE) #十六进制转二进制
+'0b1110'
+>>> 
+>>> int(0b1010) #二进制转十进制
+10
+>>> int(0o11) #八进制转十进制
+9
+>>> int(0x1f) #十六进制转十进制
+31
+>>> 
+>>> hex(0o7777) #八进制转十六进制
+'0xfff'
+>>> hex(888) #十进制转十六进制
+'0x378'
+>>> 
+>>> oct(0b111) #二进制转八进制
+'0o7'
+>>> oct(0x777) #十六进制转八进制
+'0o3567'
+
+```
+## 布尔与复数
+
+```python
+>>> type(True)
+<class 'bool'>
+>>> type(False)
+<class 'bool'>
+>>> int(True)
+1
+>>> int(False)
+0
+>>> bool(1)
+True
+>>> bool(0)
+False
+>>> bool(-1)
+True
+>>> bool(2)
+True
+>>> bool(2.2)
+True
+>>> bool(0b01)
+True
+>>> bool(0b0)
+False
+>>> bool('abc')
+True
+>>> bool('')
+False
+>>> bool([1,2,3])
+True
+>>> bool([])
+False
+>>> bool({1,1,1})
+True
+>>> bool({})
+False
+>>> bool(None)
+False
+```
+
+# 字符串
+
+## 单引号与双引号
+
+```python
+>>> 1
+1
+>>> 2
+2
+>>> 'hello world'
+'hello world'
+>>> "Hello World"
+'Hello World'
+>>> 1
+1
+>>> '1'
+'1'
+>>> type(1)
+<class 'int'>
+>>> type('1')
+<class 'str'>
+>>> 
+>>> 'let's go'
+SyntaxError: invalid syntax
+>>> "left 's go"
+"left 's go"
+>>> 'left "s go'
+'left "s go'
+>>> 'left\'s go'  #转义字符
+"left's go"
+>>> 
+```
+
+## 多行字符串
+
+```python
+>>> '''
+hello world
+hello world
+hello world
+'''
+'\nhello world\nhello world\nhello world\n'
+>>> 
+>>> """
+hello world
+hello world
+hello world
+"""
+'\nhello world\nhello world\nhello world\n'
+>>> 
+>>> "hellow world hello world hello world"
+'hellow world hello world hello world'
+>>> 
+>>> print("""hello world\n hello world\n hello world""")
+hello world
+ hello world
+ hello world
+>>> 
+>>> print('''hello world\n hello world\n hello wolrd''')
+hello world
+ hello world
+ hello wolrd
+>>> 
+>>> print("hello world\nhello world\nhello world")
+hello world
+hello world
+hello world
+>>> 
+>>> 'hello\
+world'
+'helloworld'
+```
+
+## 转义字符
+> 无法"看见"的字符  
+> 与语言本身语法有冲突的字符   
+
+
+符号 | 描述 
+---------|----------
+\n | 换行
+\\' | 单引号
+\t | 横向制表符
+\r | 回车
+
+## 原始字符串
+
+```python
+>>> print('hello \n world')
+hello 
+ world
+>>> 'hello \n world'
+'hello \n world'
+>>> 
+>>> print('hello \\n world')
+hello \n world
+>>> 'left \'s go'
+"left 's go"
+>>> print('c:\northwind\northest')
+c:
+orthwind
+orthest
+>>> print('c:\\northwind\\northest')  #方法1 使用转义符输出
+c:\northwind\northest
+>>> 
+>>> print(r'c:\northwind\northest')  #方法2 使用r表示输出,不是一个普通字符串,而是一个原始字符串
+c:\northwind\northest
+>>> 
+```
+
+## 字符串运算
+
+```python
+>>> 1+1
+2
+>>> 2*2
+4
+>>> "hello"+"world"
+'helloworld'
+>>> "hello"*3  # 该字符串输出3次
+'hellohellohello'
+>>> "hello"*"world" # 字符串不能乘以字符串
+Traceback (most recent call last):
+  File "<pyshell#4>", line 1, in <module>
+    "hello"*"world"
+TypeError: can't multiply sequence by non-int of type 'str'
+>>> 
+>>> "hello world"[0]
+'h'
+>>> "hello world"[3]
+'l'
+>>> "hello world"[4]
+'o'
+>>> "hello world"[-1] #获取最后一个字符
+'d'
+>>> "hello world"[-3] #负数,从右边开始数,第三个
+'r'
+>>> 
+>>> "hello world"[0:4] #字长,0表示从左边开始算4个字符串
+'hell'
+>>> "hello world"[0:-1] #从左边到右边,截至-1个止
+'hello worl'
+>>> "hello world"[0:-3]
+'hello wo'
+
+>>> "hello world"[6:10]
+'worl'
+>>> "hello world"[6:20]
+'world'
+>>> "hello world"[6:-1]
+'worl'
+>>> "hello world"[6:-2]
+'wor'
+>>> "hello world"[6:0]
+''
+>>> "hello world"[6:-0]
+''
+>>> "hello world"[6:]  # 截取 从左边第6个字符开始到结束
+'world'
+>>> 
+>>> "hello python java c# javascript php ruby"[6:]
+'python java c# javascript php ruby'
+>>> "hello python java c# javascript php ruby"[:-4]
+'hello python java c# javascript php '
+>>> "hello python java c# javascript php ruby"[-4:] #从右边数4个,然后取全部
+'ruby'
+
+>>> r'C:\windows'  #原始字符串
+'C:\\windows'
+>>> R'c:\windows'
+'c:\\windows'
+```
+
+## 列表 
+
+```python
+>>> type([1,2,3,4,56])
+<class 'list'>
+>>> type(['helo','world',1,9])
+<class 'list'>
+>>> type(['hello','world',1,9,True,False])
+<class 'list'>
+>>> type([[1,2],[3,4],[True,False]])
+<class 'list'>
+
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺'][0]  #获取指定数据
+'新月打击'
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺'][3]
+'月神冲刺'
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺'][0:2]
+['新月打击', '苍白之爆']
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺'][-1:]
+['月神冲刺']
+>>> 
+>>> ['新月打击','苍白之爆','月之降临','月神冲刺']+['点燃','虚弱']  # 再添加数据
+['新月打击', '苍白之爆', '月之降临', '月神冲刺', '点燃', '虚弱']
+>>> ['点燃','虚弱']*2  #获取多份数据
+['点燃', '虚弱', '点燃', '虚弱']
+>>> ['点燃','虚弱']*['点燃','虚弱']  #列表是不能相乘
+Traceback (most recent call last):
+  File "<pyshell#13>", line 1, in <module>
+    ['点燃','虚弱']*['点燃','虚弱']
+TypeError: can't multiply sequence by non-int of type 'list'
+```
+
+## 元组
+
+```python
+>>> (1,2,3,4,5)
+(1, 2, 3, 4, 5)
+>>> (1,'-1',True)
+(1, '-1', True)
+>>> (1,2,3,4)[0]
+1
+>>> (1,2,3,4)[0:2]
+(1, 2)
+>>> (1,2,3)+(4,5,6)
+(1, 2, 3, 4, 5, 6)
+>>> (1,2,3)*3
+(1, 2, 3, 1, 2, 3, 1, 2, 3)
+>>> 
+>>> type((1,2,3))
+<class 'tuple'>
+>>> type(1)
+<class 'int'>
+>>> type([1,2,3])
+<class 'list'>
+>>> type('hello')
+<class 'str'>
+
+>>> type((1,))
+<class 'tuple'>
+>>> type(())
+<class 'tuple'>
+
+```
+
+## 序列总结
+
+```python
+>>> int,float,bool,str,list,tuple
+(<class 'int'>, <class 'float'>, <class 'bool'>, <class 'str'>, <class 'list'>, <class 'tuple'>)
+>>> 'hello world'[2]
+'l'
+>>> [1,2,3][2]
+3
+>>> 3 in [1,2,3,4]
+True
+>>> 10 in [1,2,3,4]
+False
+>>> 3 not in [1,2,3,4]
+False
+
+>>> len([1,2,3,4,5,6])
+6
+>>> len('hello world')
+11
+>>> max([1,2,3,4,5,6])
+6
+>>> min([1,2,3,4,5,6])
+1
+>>> max('hello world')
+'w'
+>>> min('hello world')
+' '
+>>> min('helloworld')
+'d'
+
+>>> 'hello world'
+'hello world'
+>>> ord('w')
+119
+>>> ord('d')
+100
+>>> ord(' ')
+32
+```
+
+## set集合
+
+```python
+>>> type({1,2,3,4,5})
+<class 'set'>
+>>> {1,2,3,4}[0]
+Traceback (most recent call last):
+  File "<pyshell#1>", line 1, in <module>
+    {1,2,3,4}[0]
+TypeError: 'set' object does not support indexing
+>>> {1,2,3,4,5}[0:2]
+Traceback (most recent call last):
+  File "<pyshell#2>", line 1, in <module>
+    {1,2,3,4,5}[0:2]
+TypeError: 'set' object is not subscriptable
+>>> {11,2,2,2,3,3,4,4}  # 集合的第二特殊:不重复
+{3, 2, 11, 4}
+
+>>> len({1,2,3})
+3
+>>> 1 in {1,2,3}
+True
+>>> 1 not in {1,2,3}
+False
+>>> [1,2,3][0]
+1
+>>> {1,2,3,4,5,6}-{3,4} #求两个集合的的差集
+{1, 2, 5, 6}
+>>> {1,2,3,4,5,6} & {3,4} #交集
+{3, 4}
+>>> {1,2,3,4,5,6} | {3,4,7} #合集
+{1, 2, 3, 4, 5, 6, 7}
+
+>>> type({})
+<class 'dict'>
+>>> type(set())
+<class 'set'>
+>>> len(set())
+0
+```
+
+## dict字典
+> 很多个key和value,集合类型(set),序列  
+> key:必须是不可变的类型  
+
+```python
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}[0]
+Traceback (most recent call last):
+  File "<pyshell#0>", line 1, in <module>
+    {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}[0]
+KeyError: 0
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}['Q']
+'新月打击'
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}['R']
+'月神冲刺'
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}['Q']
+'新月打击'
+>>> {'Q':'新月打击','W':'苍白之爆','E':'月之降临','R':'月神冲刺'}
+{'Q': '新月打击', 'W': '苍白之爆', 'E': '月之降临', 'R': '月神冲刺'}
+>>> {1:'新月打击','1':'苍白之爆','E':'月之降临','R':'月神冲刺'}
+{1: '新月打击', '1': '苍白之爆', 'E': '月之降临', 'R': '月神冲刺'}
+>>> type({1:'新月打击','1':'苍白之爆','E':'月之降临','R':'月神冲刺'})
+<class 'dict'>
+>>> {[1,2]:'新月打击','1':'苍白之爆','E':'月之降临','R':'月神冲刺'}  # key:必须是不可变的类型
+Traceback (most recent call last):
+  File "<pyshell#7>", line 1, in <module>
+    {[1,2]:'新月打击','1':'苍白之爆','E':'月之降临','R':'月神冲刺'}
+TypeError: unhashable type: 'list'
+>>> type({})
+<class 'dict'>
+```
 
 
 # 条件控制
