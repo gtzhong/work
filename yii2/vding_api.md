@@ -103,6 +103,15 @@ rest/versions/v1/service/controllers/BaseController.php
 
 ```
 
+## access_token生成
+>注: user.access_token与user.password_hash两个是没有关系   
+
+```php
+//生成新的token
+$newToken = \Yii::$app->getSecurity()->generateRandomString(40);
+
+```
+
 ## api认证_zhou
 >参考 [yii2项目实战-restful api之授权验证
 ](http://blog.csdn.net/lhorse003/article/details/62215672)  
