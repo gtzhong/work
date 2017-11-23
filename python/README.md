@@ -20,13 +20,15 @@
 		- [set集合](fn/base.md#set集合) 无序 {}表示
 		- [dict字典](fn/base.md#dict字典) key/value {key1:value1,key2:value2...}
 	- 变量与运算符
-		- 可变与不可变
-		- 赋值运算符
-		- 关系运算符
-		- 逻辑运算符
-		- 成员运算符
-		- 身份运算符
-		- 位运算符
+		- [值类型与引用类型](fn/base.md#值类型与引用类型)
+		- [可变与不可变](fn/base.md#可变与不可变)
+		- [赋值运算符](fn/base.md#赋值运算符)
+		- [关系运算符](fn/base.md#关系运算符)
+		- [逻辑运算符](fn/base.md#逻辑运算符)
+		- [成员运算符](fn/base.md#成员运算符)
+		- [身份运算符](fn/base.md#身份运算符)
+		- [如何判断变量的值_身份与类型](fn/base.md#如何判断变量的值_身份与类型)
+		- [位运算符](fn/base.md#位运算符)
 - 条件控制
 	- [if/elif](fn/base.md#if/elif) 
 	- [try/except/while](fn/base.md#try/except/while)  
@@ -37,6 +39,7 @@
 	- [while循环使用else语句](fn/base.md#while循环使用else语句) 
 - for
 	- [循环输出数组](fn/base.md#循环输出数组)
+	- [多次循环输出数组](fn/base.md#多次循环输出数组)
 	- [循环使用break](fn/base.md#循环使用break)
 - break和continue
 	- [break和continue语句及循环中的else子句](fn/base.md#break和continue语句及循环中的else子句)
@@ -49,6 +52,16 @@
 		- [结合range()和len()函数以遍历一个序列的索引](fn/base.md#结合range()和len()函数以遍历一个序列的索引)
 	- enumerate 
 		- [for i,j](fn/base.md#for i,j)
+	- [input](source/input.py)
+- 包
+	- import
+		- [import t.t1](source/seven/import_a.py)
+		- [import t.t1 as m](source/seven/import_b.py)
+	- from
+		- [from t.t1 import](source/seven/from_a.py)
+		- [from t import t1](source/seven/from_b.py)
+		- [from t.t1 import *](source/seven/from_c.py)
+	- [过滤变量的外部调用](source/seven/t/t1.py)  __all__
 - 迭代器 iter 和 next 
 	- [逐条输出](fn/base.md#逐条输出)
 	- [for遍历](fn/base.md#for遍历)

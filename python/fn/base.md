@@ -471,6 +471,372 @@ TypeError: unhashable type: 'list'
 <class 'dict'>
 ```
 
+# 变量与运算符
+
+## 值类型与引用类型
+> 值类型   不可改变 int str tuple
+> 引用类型  可变    list(也叫数组)  set dict
+
+```python
+>>> a =1
+>>> b =a
+>>> a=3
+>>> print(b)
+1
+>>> #引用类型
+>>> a = [1,2,3]
+>>> b=a
+>>> a[0]='1'
+>>> print(b)
+['1', 2, 3]
+>>> a='hello'
+>>> a=a+'python'
+>>> print(a)
+hellopython
+>>> b='hello'
+>>> id(b)
+59052192
+>>> b=b+'python'
+>>> id(b)
+59073344
+>>> 'python'[0]
+'p'
+>>> python[0]='o'  # 字符串是不可改变
+Traceback (most recent call last):
+  File "<pyshell#18>", line 1, in <module>
+    python[0]='o'
+NameError: name 'python' is not defined
+>>> 
+```
+
+## 可变与不可变
+
+```python
+>>> a = [1,2,3]
+>>> id(a)
+56653384
+>>> hex(id(a))
+'0x3607648'
+>>> 
+>>> a[0]='1' #list是引用类型,可变的,所以ID是一样
+>>> id(a)
+56653384
+
+>>> a = (1,2,3)
+>>> a[0] ='1'  # 元组是值类型,不可改变
+Traceback (most recent call last):
+  File "<pyshell#8>", line 1, in <module>
+    a[0] ='1'
+TypeError: 'tuple' object does not support item assignment
+>>> b=[1,2,3]
+>>> b.append(4)  #list是引用类型,可变的,所以ID是一样
+>>> print(b)
+[1, 2, 3, 4]
+>>> c=(1,2,3)  # 元组是值类型,不可改变
+>>> c.append(4)
+Traceback (most recent call last):
+  File "<pyshell#16>", line 1, in <module>
+    c.append(4)
+AttributeError: 'tuple' object has no attribute 'append'
+
+>>> a = (1,2,3,[1,2,4])
+>>> a[2]
+3
+>>> a[3]
+[1, 2, 4]
+>>> a[3][2]
+4
+>>> a = (1,2,3,[1,2,['a','b','c']])
+>>> a[3][2][1]
+'b'
+>>> a=(1,2,3,[1,2,4])
+>>> a[2]=
+SyntaxError: invalid syntax
+>>> a[2]='3'
+Traceback (most recent call last):
+  File "<pyshell#8>", line 1, in <module>
+    a[2]='3'
+TypeError: 'tuple' object does not support item assignment
+>>> a[3][2] ='4'  # 元组包含列表,列表是可以改变
+>>> print(a)
+(1, 2, 3, [1, 2, '4'])
+```
+
+## 赋值运算符
+
+```python
+>>> 'hello'+'world'
+'helloworld'
+>>> [1,2,3]*3
+[1, 2, 3, 1, 2, 3, 1, 2, 3]
+>>> 3-1
+2
+>>> 3/2
+1.5
+>>> 3//2
+1
+>>> 5%2
+1
+>>> 2**2
+4
+>>> 2*2
+4
+>>> 2**3
+8
+```
+
+## 关系运算符
+
+```python
+>>> 1==1
+True
+>>> 1>1
+False
+>>> 1>=1
+True
+>>> a>=b
+Traceback (most recent call last):
+  File "<pyshell#3>", line 1, in <module>
+    a>=b
+NameError: name 'a' is not defined
+>>> a=1
+>>> b=2
+>>> a!=b
+True
+>>> 1+1
+2
+>>> 1>1
+False
+>>> 
+>>> b=1
+>>> b+=b>=1
+>>> print(b)
+2
+>>> print(b>=1)
+True
+>>> int(True)
+1
+>>> 'a' > 'b'
+False
+>>> ord('a')
+97
+>>> ord('b')
+98
+>>> 'abc' < 'abd'
+True
+>>> ord('c')
+99
+>>> ord('d')
+100
+```
+
+## 逻辑运算符
+> -1 0 为flase  
+
+```python
+>>> True and True
+True
+>>> True and False
+False
+>>> True or False
+True
+>>> False or False
+False
+>>> not False
+True
+>>> not True
+False
+>>> not not True
+True
+>>> 1 and 1
+1
+>>> 'a' and 'b'
+'b'
+>>> 'a' or 'b'
+'a'
+>>> not 'a'
+False
+>>> not True
+False
+>>> a=True
+>>> b=False
+>>> a or b
+True
+>>> b and a
+False
+
+>>> not 0.1 
+False
+>>> not ''  #空字符串为false
+True
+>>> not '0' #
+False
+>>> not []
+True
+>>> not [1,2]
+False
+
+>>> not 1
+False
+>>> [1] or []
+[1]
+>>> [] or [1]
+[1]
+>>> 'a' and 'b'
+'b'
+>>> '' and 'b'
+''
+>>> 
+>>> 1 and 0
+0
+>>> 0 and 1
+0
+>>> 1 and 2
+2
+>>> 2 and 1
+1
+>>> 0 or 1
+1
+>>> 1 or 0
+1
+>>> 1 or 2
+1
+```
+
+## 成员运算符
+
+```python
+>>> a=1
+>>> a in [1,2,3,4,5]
+True
+>>> b=7
+>>> b in [1,2,3,4,5]
+False
+>>> b not in [1,2,3,4,5]
+True
+>>> b='h'
+>>> b in 'hello'
+True
+>>> b not in (1,2,3,4,5)
+True
+>>> b not in {1,2,3,4,5}
+True
+>>> 
+>>> b = 'a'
+>>> b in {'c':1}
+False
+>>> b=1
+>>> b in {'c':1}
+False
+>>> b='c'
+>>> b in {}
+False
+>>> b in {'c':1} # 检测的是键名,不是键值
+True
+```
+
+## 身份运算符
+> 如果两个变量取值相等,则is返回 True,is ==  
+> is不是比较值相等,is比较的是两个变量的身份是否相等  
+
+```python
+>>> a=1
+>>> b=2
+>>> a is b
+False
+>>> a=1
+>>> b=1
+>>> a is b
+True
+>>> a='hello'
+>>> b='world'
+>>> a is b
+False
+>>> c='hello'
+>>> a is c
+True
+
+>>> a=1
+>>> b=1.0
+>>> a ==b
+True
+>>> a is b
+False
+
+>>> a=1   #is不是比较值相等,is比较的是两个变量的身份是否相等 
+>>> b=1.0
+>>> a is b
+False
+>>> id(a)
+1582290736
+>>> id(b)
+17560128
+>>>
+>>> a=1
+>>> b=1
+>>> a is b
+True
+>>> id(a)
+1582290736
+>>> id(b)
+1582290736
+>>>
+
+>>> a = {1,2,3}  # 集合比较
+>>> b={2,1,3}
+>>> a ==b
+True
+>>> a is b
+False
+
+>>> c=(1,2,3) #元组比较
+>>> d=(2,1,3)
+>>> c==d
+False
+>>> c is d
+False
+>>> id(c)
+44386664
+>>> id(d)
+44379432
+```
+
+## 如何判断变量的值_身份与类型
+> 对象的三个特殊 id value type    is == isinstance
+
+```python
+>>> a = 'hello'
+>>> type(a)
+<class 'str'>
+>>> type(a) == int
+False
+>>> type(a) == str
+True
+>>> isinstance(a,str)
+True
+>>> isinstance(a,int)
+False
+>>> 
+>>> isinstance(a ,(int,str,float))
+True
+>>> isinstance(a,(int,float))
+False
+>>> 
+```
+
+## 位运算符
+
+```python
+>>> a =2  
+>>> b=3
+>>> a&b #按位与
+2
+>>> a=2 
+>>> b=3
+>>> a|b #按位或
+3
+```
+
 
 # 条件控制
 
@@ -640,6 +1006,33 @@ print("完成循环!")
 完成循环!
 ```
 
+## 多次循环输出数组
+
+```python
+# 二次循环 遍历/循环 序列或者集合,字典
+
+a = [['aple','orange','banana','grape'],(1,2,3)]
+
+for x in a:
+    for y in x:
+        print(y)
+else:
+    print('fruit is gone')
+```
+
+**输出** 
+```
+aple
+orange
+banana
+grape
+1
+2
+3
+fruit is gone
+```
+
+
 # break和continue
 ## break和continue语句及循环中的else子句
 ```python
@@ -790,6 +1183,12 @@ for i,j in enumerate(arr):
 4 28
 5 30
 6 40
+```
+
+## input
+
+```python
+
 ```
 
 # 迭代器
