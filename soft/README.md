@@ -161,6 +161,9 @@
 			- 过滤广告
 				- 看VIP视频过滤规则 vip_rules.txt
 			- SS的配置
+				- 加密方式: rc4-md5
+				- 混淆: plain
+				- 协议: origin
 				- [添加节点的顺序](route/README.md)
 			- [开启webshell](route/README.md#开启webshell)
 			- ss
