@@ -60,8 +60,11 @@
 	- from
 		- [from t.t1 import](source/seven/from_a.py)
 		- [from t import t1](source/seven/from_b.py)
-		- [from t.t1 import *](source/seven/from_c.py)
+		- [from t.t1 import *](source/seven/from_c.py)  导入无限入
+		- [from show import (a,b,c)](source/seven/from_d.py)导入多个
 	- [过滤变量的外部调用](source/seven/t/t1.py)  __all__
+		- [模块文件过滤变量输出](fn/base.md#模块文件过滤变量输出)
+		- [过滤模块文件的导入使用](fn/base.md#过滤模块文件的导入使用)
 - 迭代器 iter 和 next 
 	- [逐条输出](fn/base.md#逐条输出)
 	- [for遍历](fn/base.md#for遍历)

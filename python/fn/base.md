@@ -1191,6 +1191,54 @@ for i,j in enumerate(arr):
 
 ```
 
+## 模块文件过滤变量输出
+
+#t1.py 
+[from show import (a,b,c)](../source/seven/t/t1.py)  
+
+```python
+#__all__ = ['a','c']  #过滤限a和c外部可调用,仅限于 from t.t1 import * 有效
+a = 1
+b = 22222333
+c = 3
+
+```
+
+#from_d.py
+[from_d.py](../source/seven/from_d.py)  
+
+```python
+from t.t1 import *
+#from t.t1 import (a,b,c) #在这个情况下,虽然上面__all__ = ['a','c'],会失效
+print(a)
+print(b) # 输出不出来,因为上面过滤
+print(c)
+```
+
+
+## 过滤模块文件的导入使用
+
+#__init__.py 
+[__init__.py](../source/seven/t/__init__.py)  
+
+```python
+__all__ = ['t1']  # 全避控制,对指定文件过滤  cf 仅限于 from t.t1 import * 有效
+init = 'this is __init__.py file'
+print(init)
+```
+
+#from_f.py
+[from_f.p](../source/seven/from_f.py)  
+
+```python
+from t import *
+
+print(t1.a)
+
+print(t2.a) #这个输不出来,__init__已经过滤了只有t1模块可以导入
+```
+
+
 # 迭代器
 >访问集合元素的一种方式  
 >迭代器是一个可以记住遍历的位置的对象。  
