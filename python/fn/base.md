@@ -1218,8 +1218,7 @@ print(c)
 
 ## 过滤模块文件的导入使用
 
-#__init__.py 
-[__init__.py](../source/seven/t/__init__.py)  
+[\__init__.py](../source/seven/t/__init__.py)  
 
 ```python
 __all__ = ['t1']  # 全避控制,对指定文件过滤  cf 仅限于 from t.t1 import * 有效
@@ -1227,8 +1226,8 @@ init = 'this is __init__.py file'
 print(init)
 ```
 
-#from_f.py
-[from_f.p](../source/seven/from_f.py)  
+
+[from_f.py](../source/seven/from_f.py)  
 
 ```python
 from t import *
@@ -1236,6 +1235,85 @@ from t import *
 print(t1.a)
 
 print(t2.a) #这个输不出来,__init__已经过滤了只有t1模块可以导入
+```
+
+## import调用内置变量
+
+
+[get_neizi.py](../source/seven/get_neizi.py)  
+```python
+import t.neizi
+
+```
+
+**输出**
+
+```
+this is __init__.py file
+name:t.neizi
+package:t
+doc:
+ 内置函数调用描述
+
+file:E:\cmk\gtiwork\python\source\seven\t\neizi.py
+```
+
+[neizi.py](../source/seven/t/neizi.py) 
+
+```python
+'''
+ 内置函数调用描述
+'''
+print('name:'+__name__)
+print('package:'+__package__)
+print('doc:'+__doc__)
+print('file:'+__file__)
+```
+
+## 入口文件与导入文件的内置变量的区别
+
+[neizi.py](../source/seven/t/t1/neizi.py) 
+```python
+print('name:'+ str(__name__))
+print('package:'+__package__)
+print('doc:'+str(__doc__))
+print('file:'+__file__)
+```
+
+
+[neizi.py](../source/seven/get_neizi2.py) 
+```python
+import t.t1.neizi
+
+print('~~~~~~~~~~~~~~ get_neizi2.py ~~~~~~~~~~~~~~~~')
+print('name:'+__name__)
+print('package:'+(__package__ or '当前模块不属于任何包'))
+print('doc:'+(__doc__ or '当前模块没有文档注释'))
+print('file:'+__file__)
+```
+
+**输出 **
+
+```
+PS E:\cmk\gtiwork\python\source\seven> python get_neizi2.py
+this is __init__.py file
+name:t.t1.neizi
+package:t.t1
+doc:None
+file:E:\cmk\gtiwork\python\source\seven\t\t1\neizi.py
+~~~~~~~~~~~~~~ get_neizi2.py ~~~~~~~~~~~~~~~~
+name:__main__
+package:当前模块不属于任何包
+doc:当前模块没有文档注释
+file:get_neizi2.py
+```
+
+## 判断该文件是否入口文件
+
+```python
+if __name == '__main__':
+	pass
+
 ```
 
 

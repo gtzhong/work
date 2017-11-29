@@ -65,6 +65,18 @@
 	- [过滤变量的外部调用](source/seven/t/t1.py)  __all__
 		- [模块文件过滤变量输出](fn/base.md#模块文件过滤变量输出)
 		- [过滤模块文件的导入使用](fn/base.md#过滤模块文件的导入使用)
+	- 内置变量
+		- [import调用内置变量](fn/base.md#import调用内置变量)
+		- [入口文件与导入文件的内置变量的区别](fn/base.md#入口文件与导入文件的内置变量的区别)
+		- [判断该文件是否入口文件](fn/base.md#判断该文件是否入口文件)
+		- 强制模块运行  python -m seven.c15
+	- 相对与绝对
+		- 入口文件没有顶级包概念
+		- 绝对路径引入 
+			- import package2.package4.m2 
+		- 相对路径引入 
+			- from .package2.package4.m2 import m
+			-  . .. ...  (1个点表当前目录,2个点上级  3个点以此类推)
 - 迭代器 iter 和 next 
 	- [逐条输出](fn/base.md#逐条输出)
 	- [for遍历](fn/base.md#for遍历)
