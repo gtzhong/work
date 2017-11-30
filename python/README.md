@@ -65,6 +65,10 @@
 			- [计算平方](source/variableParam/square.py)
 		- [2个星字](source/variableParam/temperature.py)
 			- [2个星字多参数](source/variableParam/temperature2.py)
+	- 变量作用域
+		- [内部变量](source/variable/t1.py)
+		- [使用域链](source/variable/t3.py)
+		- [global](source/variable/global.py)
 - 包
 	- import
 		- [import t.t1](source/seven/import_a.py)
@@ -127,6 +131,10 @@
 	- [多继承](fn/base.md#多继承)
 	- [方法重写](fn/base.md#方法重写)
 	- [运算符重载](fn/base.md#运算符重载)
+	- @七月
+		- [简单的student类](source/class/student.py)
+		- [实例调用student类](source/class/show.py)
+		- [__dict__应用](source/class/dict.py)
 - Python3标准库
 	- [操作系统接口](fn/base.md#操作系统接口)
 		- os.getcwd()
