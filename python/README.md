@@ -53,6 +53,18 @@
 	- enumerate 
 		- [for i,j](fn/base.md#for i,j)
 	- [input](source/input.py)
+	- [返回多个结果](fn/base.md#返回多个结果)
+		- [输出方式1](fn/base.md#输出方式1)
+		- [输出方式2](fn/base.md#输出方式2)
+	- [序列解包](source/series.py)
+	- [默认参数](source/def_student.py)
+		- 传实参变量名,可改变顺序
+	- 可变参数
+		- [1个星号](source/variableParam/simple.py)
+			- [1个星号多参数](source/variableParam/simple2.py)
+			- [计算平方](source/variableParam/square.py)
+		- [2个星字](source/variableParam/temperature.py)
+			- [2个星字多参数](source/variableParam/temperature2.py)
 - 包
 	- import
 		- [import t.t1](source/seven/import_a.py)

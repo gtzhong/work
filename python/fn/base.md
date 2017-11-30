@@ -1185,10 +1185,33 @@ for i,j in enumerate(arr):
 6 40
 ```
 
+# 返回多个结果
+
+## 输入方式1
+
+[from_d.py](../source/fun/f1.py)  
+```python
+def damage(skill1,skill2):
+    damage1 = skill1*3
+    damage2 = skill2*2+10
+    return damage1,damage2
+
+damages = damage(3,6)
+print(damages)
+```
+
+## 输出方式2
+
+```python
+damages = damage(3,6)
+print(damages[0],damages[1]) #不建议使用这个方法,因为数字是没有意义的
+```
+
 ## input
 
 ```python
-
+skill1_damage,skill2_damage = damage(3,6)
+print(skill1_damage,skill2_damage)  #有意义的变量,方便维护
 ```
 
 ## 模块文件过滤变量输出
