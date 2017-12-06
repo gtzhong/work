@@ -135,6 +135,35 @@
 		- [简单的student类](source/class/student.py)
 		- [实例调用student类](source/class/show.py)
 		- [__dict__应用](source/class/dict.py)
+		- 实例方法
+			- [内部外部访问类变量](source/class/visitClass.py)
+		- 类方法
+			- [每实例一个类,班类总数+1](source/class/funClass.py)
+		- 静态方法
+			- [静态方法与类方法比较](source/class/staticClass.py)
+		- 成员可见性
+			- [真假私有变量比较](source/class/privateClass.py)
+		- 调用
+			- [继承父类构造方法](source/class/overClass.py)
+- 正则 @七月
+	- 函数
+		- [简单查询index及in](source/regular/index_in.py)
+		- re.findall
+			- [re.findall常用](source/regular/findall.py)
+			- [数量词及贪婪与非贪婪](source/regular/isGreed.py)
+			- [匹配0次1次或者无限多次](source/regular/01.py)
+			- [边界匹配符使用](source/regular/border.py)
+			- 组
+				- [组_group应用](source/regular/group.py)
+				- [匹配两个单词在字符串](source/regular/group2.py) r.group()  r.groups()
+			- 第三个参数 匹配模式参数
+				- re.I	忽略大小写	
+				- re.S  表匹配除换行符\n之外其它所有字符 
+					- [忽略大小写及除换行符的所有字符](source/regular/pattern.py)
+		- re.sub
+			- [re.sub正则替换](source/regular/sub01.py)
+			- [re.sub把函数作为参数传递](source/regular/sub02.py)
+		- [search与match函数](source/regular/match_search.py)
 - Python3标准库
 	- [操作系统接口](fn/base.md#操作系统接口)
 		- os.getcwd()
