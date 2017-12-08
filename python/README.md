@@ -164,47 +164,69 @@
 			- [re.sub正则替换](source/regular/sub01.py)
 			- [re.sub把函数作为参数传递](source/regular/sub02.py)
 		- [search与match函数](source/regular/match_search.py)
-	- 枚举 @七月
-		- 要使类成为枚举的话,必须继承Enum
-			- [定义黄钻绿岾黑钻红钻](source/enum/define.py)
-		- 枚举和普通类相比有什么优势
-			- 没有使用枚举的缺陷
-				- 可变
-				- 没有防止相同标签的功能
-			- 枚举值不可更改
-			- [举例](source/enum/defect.py)
-		- 区分
-			- 枚举名字
-			- 枚举的值
-			- 枚举类型
-			- [举例](source/enum/diff.py)
-				- 区分名字/值/类型
-				- 遍历枚举
-		- 枚举的比较运算
-			- 可以进行等值比较
-			- 身份比较is
-				- 不可两个不同类的枚举比较
-			- 不可以数字比较
-			- 不可以使用大小写
-			- [举例](source/enum/compare.py)
-		- 枚举注意事项
-			- 枚举里相同的标签(变量名)不可以一样
+- 枚举 @七月
+	- 要使类成为枚举的话,必须继承Enum
+		- [定义黄钻绿岾黑钻红钻](source/enum/define.py)
+	- 枚举和普通类相比有什么优势
+		- 没有使用枚举的缺陷
+			- 可变
+			- 没有防止相同标签的功能
+		- 枚举值不可更改
+		- [举例](source/enum/defect.py)
+	- 区分
+		- 枚举名字
+		- 枚举的值
+		- 枚举类型
+		- [举例](source/enum/diff.py)
+			- 区分名字/值/类型
+			- 遍历枚举
+	- 枚举的比较运算
+		- 可以进行等值比较
+		- 身份比较is
+			- 不可两个不同类的枚举比较
+		- 不可以数字比较
+		- 不可以使用大小写
+		- [举例](source/enum/compare.py)
+	- 枚举注意事项
+		- 枚举里相同的标签(变量名)不可以一样
+		- 不同的标签里,可以出现相同的值如
+		- [举例](source/enum/attention.py)
 			- 不同的标签里,可以出现相同的值如
-			- [举例](source/enum/attention.py)
-				- 不同的标签里,可以出现相同的值如
-				- 遍历的情况下,如果数值出现相同
-				- 打印别名出来
-					- __members__
-					- __members__.items()
-		- 枚举转换
-			- 建议
-				- 枚举存数据库,建议保存数字
-			- 数字转换为枚举类型
-			- [举例](source/enum/convert.py)
-		- 怎样限定不能出现相同的值?
-			- [举例](source/enum/enum_intEnum.py)
-		- 怎样限定不能出现相同的值?
-			- [举例](source/enum/filterSameValue.py)
+			- 遍历的情况下,如果数值出现相同
+			- 打印别名出来
+				- __members__
+				- __members__.items()
+	- 枚举转换
+		- 建议
+			- 枚举存数据库,建议保存数字
+		- 数字转换为枚举类型
+		- [举例](source/enum/convert.py)
+	- 怎样限定不能出现相同的值?
+		- [举例](source/enum/enum_intEnum.py)
+	- 怎样限定不能出现相同的值?
+		- [举例](source/enum/filterSameValue.py)
+-闭包 @七月
+	- 描述
+		- 闭包 = 函数+环境变量 (函数定义时候)
+		- 现场
+		- 函数的外部间接访问函数内部的变量
+		- 闭包的好处,保存着上一次的值
+	- 举例
+		- [最简单的例子](source/closure/simple.py)
+			- 环境变量,不受外部的影响
+			- 获取闭包的对象
+				- __closure__
+			- 获取内部的变量
+				- __closure__[0].cell_contents
+		- [不算是闭包,因为a受外面的影响了](source/closure/no_closure.py)
+		- [闭包执行顺序](source/closure/order.py)
+		- 闭包的经典误区
+			- [判断是否团包](source/closure/is_closure.py)
+				- print(f.__closure__)  #报错为 NoneType
+				- 无论有没有设置return
+		- [累计计算走了多少步](source/closure/walk.py)
+			- 使用非闭包方式
+			- 使用闭包方式
 - Python3标准库
 	- [操作系统接口](fn/base.md#操作系统接口)
 		- os.getcwd()
