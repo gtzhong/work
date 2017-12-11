@@ -100,7 +100,46 @@
 - 生成器
 	-  [yield实现斐波那契数列](fn/base.md#yield实现斐波那契数列)
 - 匿名函数
-	-  [lambda创建匿名函数](fn/base.md#lambda创建匿名函数)
+	- lambda parameter_list:expression(表达式,不做复杂的业务逻辑)
+	- [与函数比较](source/lambda.py)
+- 三元表达式
+	- x>y ? x:y
+	- r = x if x> y else y
+		- 条件为真时返回的结果 if条件判断 else 条件为假时的返回结果
+	- [举例](source/termary.py)
+- 高阶函数
+	- map
+		- [对数据的每个值进行平方举例](source/map/square.py)
+		- [map与lambda](source/map/square.py#map与lambda)
+			- 上述传入两个参数
+			- 并不会报错,就是少输出对应的值
+				- list_y少了几个值
+				- list_x少了几个值
+	- reduce
+		- 跟map相比,lambda传入两个参数,后面不用带对应的两个参数,仅一个就够
+		- 连接计算,连续调用lambda
+		- 大数据
+			- map/reduce 编程模型 映射 归约 并行计算
+		- reduce第三个参数,初始值 
+			- [举例](source/reduce.py)
+				- 对数组的累加
+	- filter
+		- filter返回的为True即可过滤
+		- [举例](source/filter.py)
+			- 将数据里的0去掉
+- 装饰器 @七月
+	- 特性 注解 
+	- @的精髓使用,使用原来的函数名调用即可
+	- 装饰器体现AOP思想
+	- 举例
+		- 如果有100个函数,都要输出时间那怎样处理呢?
+			- [方案A 最笨的方式](source/decorate/a.py)
+			- [方案B 对功能封装,调用输出](source/decorate/b.py)
+			- [方案C @的精髓使用,使用原来的函数名调用即可](source/decorate/c.py)
+			- [方案D 带一个参数的装饰器](source/decorate/d.py)
+			- [方案F 带多个参数的装饰器](source/decorate/e.py)
+			- [最终方案 带多个参数的装饰器优化](source/decorate/f.py)
+				通杀变态的参数长度 func(*args,**kw)
 - 变量作用域
 	- global和nonlocal关键字 #当内部作用域想修改外部作用域的变量时
 		- [global_demo](fn/base.md#global_demo)
