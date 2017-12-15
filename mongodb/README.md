@@ -1,0 +1,107 @@
+
+- 操作使用
+	- 常用操作
+		- show dbs
+			- 查看有多少数据库
+		- use  db
+			- 选择数据库,如果没有会自动创建
+		- db 
+			- 查看当前在哪个数据库
+		- db.dropDatabase()
+			- 删除数据库  先use db
+		- mongod --version
+			- 查看版本
+	- curl 
+		- 查询
+			- 查询有多少条记录
+				- db.imooc_collection.count()
+			- 过滤与排序
+				- db.article.find().skip(3).limit(2).sort({x:1})
+					- 1 从小到大  -1 从大到小
+			- 查询指定
+				- db.sms.find({num:20})
+		- 插入
+			- 批量插入记录
+				- for(i=1;i<50;i++)db.sms.insert({num:i,name:'test'})
+			- 单个字段
+				- db.article.insert({title:'某新闻标题'})
+			- 多个字段
+				 - db.article.insert({title:'某新闻标题',author:'李四'})
+		- 更新
+			- 不可使用
+				db.article.update({x:1},{x:999})
+			- 使用$set更新 
+				- db.article.update({z:100},{$set:{y:99}})
+			- 更新不存在的记录,而自动插入数据,使用第三鼐参数
+				- db.article.udpate({x:100},{y:999},true)
+			- 多条记录更新,使用第四个参数
+				- db.article.update({num:25},{$set:{author:"王八"}},false,true)
+		- 删除
+			- 删除表
+				- db.article.drop()
+			- 删除记录
+				- db.article.remove({num:25})
+		- [举例](fn/curl.txt)
+- 索引
+	- 分类
+		- _id索引
+		- 单键索引
+			- 单键索引是最普通的索引
+				- 例如: 一条记录为{x:1,y:2,z:3}
+			- 与_id索引不同,单键索引不会自动创建
+			- 操作
+				- db.imooc_collection.ensureIndex({x:1})
+			- [举例](fn/index.md#单键索引)
+		- 多键索引
+			- 多键索引与单键索引创建形式相同,区别在于字段的值
+			- db.sms.insert({x:[1,2,3,4,5]})
+		- 复合索引
+			- 当我们索引条件不只有一个时,就需要建立复合索引
+			- 插入{x:1,y:2,z:3} 按照x和y值的查询  创建索引如下
+				- db.collection.ensureIndex({x:1,y:1})  # 使用{x:1,y:1}作为条件进行查询
+				- db.imooc_2.find({x:1,y:2})  #进行复合查询
+		- 过期索引
+            - 描述
+                - 1.索引索引:是在一段时间后过期的索引
+                - 2.在索引过期后,相应的数据会被删除
+                - 3.场景:登陆信息 存储日志
+			- db.collection.ensureIndex({time:1},{expireAfterSeconds:10})
+			- 存储在过期索引字段的值必须是指定的时间类型
+				- 说明:必须是 ISODate或者ISODate数组,不能使用时间戳,否则不能被自动删除
+			- [举例](fn/index.md#过期索引)
+        - 全文索引
+            - 对字符串与字符串数组创建全文可索引的索引
+            - 场景: {author:"",title:"",article:""}
+            - 操作
+                - 创建索引
+                    - db.articles.ensureIndex({key:"text"})
+                    - db.articles.ensureIndex({key_1:"text",key_2:"text"})
+                    - db.articles.ensureIndex({"$**":"text"})
+                - 查询
+                    - 普通查询
+                        - db.articles.find({$text:{$search:"coffee"}})
+                        - db.articles.find({$text:{$search:"aa bb cc"}}) #空格表示或关系 
+                        - db.articles.find({$text:{$search:"co bb -cc"}}) # 负号表示不包含
+                        - db.articles.find({$text:{$search:"\"aa\" bb cc"}}) #使用双引号表示与的关系 ,必须包括aa关键字
+                    - 权重查询
+                        - $meta操作符: {score:{$meta:"testScore"}}
+                        - db.articles.find({$text:{$search:"aa bb -rr"}},{score:{$meta:"textScore"}})
+                        - 排序:db.articles.find({$text:{$search:"aa"}},{score:{$meta:"textScore"}}).sort({score:{$meta:"textScore"}})
+            - 全文索引的使用限制
+                - 1.每镒查询,只能指定一个$text查询
+                - 2.$text查询不能出现在$nor查询中
+                - 3.查询中如果包含$test,hint不再起作用
+                - 4.不支持中文
+            举例
+                [使用全文索引进行查询](fn/index.md#使用全文索引进行查询)
+                [全文索引相似度(搜索权重)](fn/index.md#全文索引相似度查询)
+		- 地理位置索引
+- 搭建与使用
+    - 安装
+        - 2.6.5
+            - 压缩包安装
+            - [举例](fn/install.md#2.6.5压缩包安装)
+        - 3.2.4
+            - yum安装
+                - [官网安装流程](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-red-hat/)
+            - [举例](fn/install.md#3.2.4yum安装)

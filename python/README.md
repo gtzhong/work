@@ -140,6 +140,7 @@
 			- [方案F 带多个参数的装饰器](source/decorate/e.py)
 			- [最终方案 带多个参数的装饰器优化](source/decorate/f.py)
 				通杀变态的参数长度 func(*args,**kw)
+		- [flask_demo](source/decorate/flask.py)
 - 变量作用域
 	- global和nonlocal关键字 #当内部作用域想修改外部作用域的变量时
 		- [global_demo](fn/base.md#global_demo)
