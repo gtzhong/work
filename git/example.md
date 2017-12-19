@@ -7,6 +7,43 @@
 >开发人员仅在微叮上开发  
 >注：微叮和安阳其实是一套系统，只不过后面分离出去了  
 
+
+## 微叮最新代码推送加Jenkin
+
+```
+beta 和 master是阿里云的仓库(aliyun)
+
+其它为内网的仓库   即  origin
+
+如将 fn-wholesale-v3 分支 推到线上如下
+
+#拉到fn-wholesale-v3分支 代码
+git co fn-wholesale-v3 
+git pull origin fn-wholesale-v3
+
+
+#推送到预发布环境
+git co beta
+git pull aliyun beta
+git merge --no-ff  fn-wholesale-v3
+git pull aliyun beta
+git push aliyun beta
+
+#推送到线上环境 
+git co master
+git pull aliyun master
+git merge --no-ff beta
+git pull aliyun master
+git push aliyun master
+
+
+使用jenkin分布推送代码
+http://jenkins.vding.cn:8001
+
+```
+![](images/jenkin.png)
+
+
 ### 微叮测试commit推送到安阳的测试环境及发布线上  
 ```
 //微叮开发测试仓库
