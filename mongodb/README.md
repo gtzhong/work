@@ -1,4 +1,12 @@
-
+- php操作  
+	- 扩展与安装
+		- [版本信息](fn/php.md#版本信息)
+		- 分类
+			- Thread safe(TS)  针对 Apache
+			- non-thread safe(NTS) 针对nginx
+		- [举例](fn/php.md#扩展与安装)
+	- 举例
+		- [获取数据](fn/php.md#获取数据)
 - 操作使用
 	- 常用操作
 		- show dbs
