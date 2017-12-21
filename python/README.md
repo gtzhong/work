@@ -53,6 +53,10 @@
 	- enumerate 
 		- [for i,j](fn/base.md#for i,j)
 	- [input](source/input.py)
+	- python不建议使用switch 
+		- 举例
+		- [字典来代替switch](source/dict2switch.py)
+	- 函数没有使用return 会返回None
 	- [返回多个结果](fn/base.md#返回多个结果)
 		- [输出方式1](fn/base.md#输出方式1)
 		- [输出方式2](fn/base.md#输出方式2)
