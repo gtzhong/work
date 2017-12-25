@@ -1756,3 +1756,24 @@ os.getcwd() # 返回当前的工作目录
 os.chdir('D:/')  # 修改当前的工作目录
 os.system('mkdir test20170623') # 执行系统命令 mkdir  创建一个目录 
 ```
+
+
+
+
+# 爬虫案例
+
+## 字节码转换为字符串
+
+```python
+r.request.urlopen(Spider.url)
+htmls = r.read()
+htmls = str(htmls,encoding='utf-8')
+```
+
+
+## 怎样去掉匹配的头与尾的标签
+
+```
+    如 <div class="vidio-info"></div>
+    加入一个组即可 ([\s\S]*?)
+```

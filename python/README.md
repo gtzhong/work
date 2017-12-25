@@ -53,6 +53,10 @@
 	- enumerate 
 		- [for i,j](fn/base.md#for i,j)
 	- [input](source/input.py)
+	- python不建议使用switch 
+		- 举例
+		- [字典来代替switch](source/dict2switch.py)
+	- 函数没有使用return 会返回None
 	- [返回多个结果](fn/base.md#返回多个结果)
 		- [输出方式1](fn/base.md#输出方式1)
 		- [输出方式2](fn/base.md#输出方式2)
@@ -69,6 +73,25 @@
 		- [内部变量](source/variable/t1.py)
 		- [使用域链](source/variable/t3.py)
 		- [global](source/variable/global.py)
+	- 列表推导式
+		- 支持
+			- 集合推导式
+			- map
+			- set 也可以被推导 
+			- dict 也可以被推导 
+			- 元组
+		- 举例
+			- [对数组里的数字进行平方](source/tui/square.py#对数组里的数字进行平方)
+			- [什么时候使用_列表推导式_有条件筛选](source/tui/square.py#什么时候使用_列表推导式_有条件筛选)
+			- [set也可以被推导](source/tui/square.py#set也可以被推导)
+			- [dict也可以被推导](source/tui/square.py#dict也可以被推导)
+			- [获取字典的key](source/tui/square.py#获取字典的key)
+			- [字典的key和value颠倒](source/tui/square.py#字典的key和value颠倒)
+			- [打印出元组](source/tui/square.py#打印出元组)
+	- None表空
+		- [举例](source/tui/none.py)
+			- if not a  是否相等 if a is not 
+			- 简单的使用 if a:/if not a:
 - 包
 	- import
 		- [import t.t1](source/seven/import_a.py)
@@ -185,6 +208,29 @@
 			- [真假私有变量比较](source/class/privateClass.py)
 		- 调用
 			- [继承父类构造方法](source/class/overClass.py)
+		- 成员可见性
+			- 默认公开
+			- 没有什么是不能访问
+			- 私有方法及变量
+				- 定义名字前加 __
+			- 举例
+				- 真假私有变量比较
+		- 三大特殊
+			- 继承性
+				- 单继承
+				- 多继承
+			- 封装性
+			- 多态性
+		- __len__与__bool__内置方法
+			- __len__
+				- 举例
+					- [默认返回true](source/class/len_bool.py#默认返回true)
+					- [如果__len__,return 0 则为False,否则为True](source/class/len_bool.py#如果__len__,return 0 则为False,否则为True)
+			- __bool__
+				- 举例
+					- [len()也可以打印 类里的__len__()方法](source/class/len_bool.py#len()也可以打印 类里的__len__()方法)
+					- [则优先取__bool__ ,否则就取__len__](source/class/len_bool.py#则优先取__bool__ ,否则就取__len__)
+			- __nonzero__ python2的 ,被 __bool__替代啦
 - 正则 @七月
 	- 函数
 		- [简单查询index及in](source/regular/index_in.py)
@@ -267,6 +313,21 @@
 		- [累计计算走了多少步](source/closure/walk.py)
 			- 使用非闭包方式
 			- 使用闭包方式
+- 爬虫案例
+	- 熊猫tv分类
+		- [举例](source/panda/spider.py)
+	- 爬虫套路
+		- 定义标签选取
+			- 定义标签  唯一性  找最近
+			- 举例
+				- [字节码转换为字符串](fn/base.md#字节码转换为字符串)
+		- 选取闭合的
+			- 关系定位标签 父与子关系
+		- 使用组过滤头与尾
+			- [\s\S]*?
+			- 举例
+				- [怎样去掉匹配的头与尾的标签](fn/base.md#怎样去掉匹配的头与尾的标签)
+		- 循环抓取列表的值
 - Python3标准库
 	- [操作系统接口](fn/base.md#操作系统接口)
 		- os.getcwd()
