@@ -228,8 +228,8 @@
 					- [如果__len__,return 0 则为False,否则为True](source/class/len_bool.py#如果__len__,return 0 则为False,否则为True)
 			- __bool__
 				- 举例
-					- [len()也可以打印 类里的__len__()方法](source/class/len_bool.py#len()也可以打印 类里的__len__()方法)
-					- [则优先取__bool__ ,否则就取__len__](source/class/len_bool.py#则优先取__bool__ ,否则就取__len__)
+					- [len()也可以打印 类里的__len__()方法](source/class/len_bool.py)
+					- [则优先取__bool__ ,否则就取__len__](source/class/len_bool.py)
 			- __nonzero__ python2的 ,被 __bool__替代啦
 - 正则 @七月
 	- 函数
