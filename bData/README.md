@@ -1,0 +1,116 @@
+- Elastic Stack
+    - 建议
+        - 官网
+            - www.elastic.co
+        - 学会查阅和搜索官方文档
+            - https://www.elastic.co/learn
+        - 学会在社区正确地提问问题
+            - https://elasticsearch.cn
+        - 学会开拓视野的方法 - Elastic日报
+            - https://elasticsearch.cn/explore/category-18
+    - Elasticsearch
+        - 配置详解
+            - 配置文件位于config目录中
+                - elasticsearch.yml
+                    - es的相关配置
+                - jvm.options
+                    - jvm的相关参数
+                - log4j2.properties
+                    - 日志相关配置
+            - elasticsearch.yml
+                - cluster.name
+                    - 集群名称,以此作为是否同一集群的判断条件
+                - node.name
+                    - 节点名称,以此作为集群中不同节点的区分条件
+                - network.host/http.port
+                    - 网络地址和端口,用于http和transport服务使用
+                - path.data
+                    - 数据存储地址
+                - path.log
+                    - 日志存储地址
+            - Development与Production模式说明
+                - 以transport的地址是否绑定在localhost为判断标准network.host
+                - Development模式下在启动时会以warning的方式提示配置检查异常
+                - Production模式下会以error的方式提示配置检查并退出
+        - 搭建
+            - 安装
+                - 5.6.3
+                    - 1. 安装jdk 1.8
+                        - 版本查询:java -version
+                    - 2. tar -zxvf elasticsearch-5.6.3
+                    - 3. cd elasticsearch-5.6.3
+                    - 4. bin/elasticsearch
+                    - 验证是否安装成功
+                        - 127.0.0.1:9200
+                - 6.1.1
+                    - 为了安全不让root权限来操作,则创建elastic用户组及elastic用户
+                        - groupadd elastic
+                        - useradd elastic -g elastic -p123456
+                        - chown -R elastic:elastic ./elasticsearch-6.1.1
+                    - 启动bin/elasticsearch
+                    - 安装过程遇到问题修改如下配置
+                        - [举例](fn/es.md#安装过程遇到问题修改如下配置)
+                        - /etc/security/limits.conf
+                        - /etc/security/limits.d/90-nproc.conf
+                        - /etc/sysctl.conf 
+            - 本地快速搭建集群
+                - 本地启动集群3个节点
+                    - bin/elasticsearch  #默认情况下端口是 9200
+                    - bin/elasticsearch -Ehttp.port=8200 -Epath.data=node2
+                    - bin/elasticsearch -Ehttp.port=7200 -Epath.data=node3 
+                - 查看本地集群的节点
+                    - 127.0.0.1:8200/_cat/nodes
+                - 更详细的节点信息
+                    - 127.0.0.1:8200/_cat/nodes?v	
+                - 查看节点的详细状态
+                    - 127.0.0.1:8200/_cluster/status
+            - 配置详解
+                - 配置文件位于config目录中
+                - elasticsearch.yml
+                - Development与Production模式说明
+                    - 以transport的地址是否绑定在localhost为判断标准network.host
+                    - Development模式下在启动时会以warning的方式提示配置检查异常
+                    - Production模式下会以error的方式提示配置检查并退出
+            - 常用术语
+            - [CRUD实际操作](fn/es.md#CRUD实际操作)
+                - 插入文档
+                - 读取文档
+                - 更新文档
+                - 删除文档
+            - 两种查询形式
+                - [String](fn/es.md#String)
+                - [DSL](fn/es.md#DSL)  #以json形式查询
+    - Kibana
+        - 搭建
+            - 5.6.3
+                - 1. 去官网下载
+                - 2. tar -zxvf kibana-5.6.3-darwin-x86_64.tar.gz
+                - 3. cd kibana-5.6.3-darwin-x86_64
+                - 4. vim config/kibana.yml  
+                    - elasticsearch.url = "http://localhost:9200" 
+                - 5. bin/kibana
+                - 6. http://localhost:5601
+            - 6.1.1
+                - 配置config/kibana.yml 
+                    - server.host: "192.168.10.55"
+                    - elasticsearch.url =192.168.10.55:9201
+                        - 取值到 bin/elasticsearch运行之后 publish_address{192.168.10.55:9201}
+        - 配置详解
+            - kibana.yml
+                - server.host/server.port
+                    - 访问kibana用的地址和端口
+                - elasticsearch.url
+                    - 待访问elasticsearch的地址
+            - Kibana常用功能说明
+                - Discover
+                    - 数据搜索查看
+                - Visualize
+                    - 图表制作
+                - Dashboard
+                    - 仪表盘制作
+                - Timelion
+                    - 时序数据的高级可视化分析
+                - DevTools
+                    - 开发者工具
+                - Management
+                    - 配置
