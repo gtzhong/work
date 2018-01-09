@@ -777,3 +777,139 @@ public function afterDelete()
     AuthAssign::deleteAll(['user_id' => $this->user_id, 'company_id' => $this->company_id]);
 }
 ```
+
+# Yii2数据库操作的各种写法ActiveRecord
+
+## 查询
+
+```php
+// find the customers whose primary key value is 10
+$customers = Customer::findAll(10);
+$customer = Customer::findOne(10);
+
+// the above code is equivalent to:
+$customers = Customer::find()->where(['id' => 10])->all();
+
+// find the customers whose primary key value is 10, 11 or 12.
+$customers = Customer::findAll([10, 11, 12]);
+$customers = Customer::find()->where(['IN','id',[10,11,12]])->all();
+
+// the above code is equivalent to:
+$customers = Customer::find()->where(['id' => [10, 11, 12]])->all();
+
+// find customers whose age is 30 and whose status is 1
+$customers = Customer::findAll(['age' => 30, 'status' => 1]);
+
+// the above code is equivalent to:
+$customers = Customer::find()->where(['age' => 30, 'status' => 1])->all();
+
+// use params binding
+$customers = Customer::find()->where('age=:age AND status=:status')->addParams([':age'=>30,':status'=>1])->all();
+
+// use index
+$customers = Customer::find()->indexBy('id')->where(['age' => 30, 'status' => 1])->all();
+
+// get customers count
+$count = Customer::find()->where(['age' => 30, 'status' => 1])->count();
+
+// add addition condition
+$customers = Customer::find()->where(['age' => 30, 'status' => 1])->andWhere('score > 100')->orderBy('id DESC')->offset(5)->limit(10)->all();
+
+// find by sql
+$customers = Customer::findBySql('SELECT * FROM customer WHERE age=30 AND status=1 AND score>100 ORDER BY id DESC LIMIT 5,10')->all();
+
+```
+
+## 修改
+
+```php
+// update status for customer-10
+$customer = Customer::findOne(10);
+$customer->status = 1;
+$customer->update();
+
+// the above code is equivalent to:
+Customer::updateAll(['status' => 1], 'id = :id',[':id'=>10]);
+```
+
+## 删除
+
+```php
+// delete customer-10
+Customer::findOne(10)->delete();
+
+// the above code is equivalent to:
+Customer::deleteAll(['status' => 1], 'id = :id',[':id'=>10]);
+```
+
+## 使用子查询
+
+```php
+$subQuery = (new Query())->select('COUNT(*)')->from('customer');
+
+// SELECT `id`, (SELECT COUNT(*) FROM `customer`) AS `count` FROM `customer`
+$query = (new Query())->select(['id', 'count' => $subQuery])->from('customer');
+```
+
+## 手写SQL
+
+```php
+// select
+$customers = Yii::$app->db->createCommand('SELECT * FROM customer')->queryAll();
+
+// update
+Yii::$app->db->createCommand()->update('customer',['status'=>1],'id=10')->execute();
+
+// delete
+Yii::$app->db->createCommand()->delete('customer','id=10')->execute();
+
+//transaction
+// outer 
+$transaction1 = $connection->beginTransaction();
+try {
+    $connection->createCommand($sql1)->execute();
+
+    // internal
+    $transaction2 = $connection->beginTransaction();
+    try {
+        $connection->createCommand($sql2)->execute();
+        $transaction2->commit();
+    } catch (Exception $e) {
+        $transaction2->rollBack();
+    }
+
+    $transaction1->commit();
+} catch (Exception $e) {
+    $transaction1->rollBack();
+}
+```
+
+## 主从配置
+ 
+```php
+[
+    'class' => 'yii\db\Connection',
+
+    // master 
+    'dsn' => 'dsn for master server',
+    'username' => 'master',
+    'password' => '',
+
+    // slaves
+    'slaveConfig' => [
+        'username' => 'slave',
+        'password' => '',
+        'attributes' => [
+            // use a smaller connection timeout
+            PDO::ATTR_TIMEOUT => 10,
+        ],
+    ],
+
+    'slaves' => [
+        ['dsn' => 'dsn for slave server 1'],
+        ['dsn' => 'dsn for slave server 2'],
+        ['dsn' => 'dsn for slave server 3'],
+        ['dsn' => 'dsn for slave server 4'],
+    ],
+]
+``` 

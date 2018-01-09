@@ -347,6 +347,13 @@
 			- [beforeSave](model.md#beforeSave)  @foreach
 			- [afterSave](model.md#afterSave)
 			- [afterDelete](model.md#afterDelete)
+		- Yii2数据库操作的各种写法ActiveRecord
+			- [查询](model.md#查询)
+			- [修改](model.md#修改)
+			- [删除](model.md#删除)
+			- [使用子查询](model.md#使用子查询)
+			- [手写SQL](model.md#手写SQL)
+			- [主从配置](model.md#主从配置)
 	- 权限 rbac
 		- 基本信息
 			- ? 代表"访客用户"
