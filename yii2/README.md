@@ -297,7 +297,7 @@
 		- 更新 updateAll
 			- [updateAll](post.md#updateAll) 
 			- updateAllCounters使用
-				- [updateAllCounters](post.md#updateAllCounters)  计数器专用
+				- [updateAllCounters_针对于数字的更新](post.md#updateAllCounters_针对于数字的更新)  计数器专用
 				- [取代updateAllCounters方法](post.md#取代updateAllCounters方法)
 				- [使用fineOne更新](post.md#使用fineOne更新)
 					- [批量_batchInsert_syg](post.md#批量_batchInsert_syg) 字段值"增量"更新

@@ -1014,7 +1014,7 @@ Test::updateAll(['status'=>1],['status'=>0,'flag'=>1]);
 // 方法2
 Test::updateAll(['status'=>1],['and',['status'=>0],['<>','flag',1]]);  
 ```
-### updateAllCounters 针对于数字的更新 如 mount = mount+5
+### updateAllCounters_针对于数字的更新 如 mount = mount+5
 ```php
 // 方法1
 Topic::updateAllCounters(['view_count' => 1], ['id' => $id]);
@@ -1023,10 +1023,10 @@ Topic::updateAllCounters(['view_count' => 1], ['id' => $id]);
 // 方法2
 Topic::updateAllCounters(['view_count' => 1], ['and', ['xxx' => 0, 'yyy' => 2], ['>', 'zzz', $time]);
 
-// 方法3
+// 方法3  累加字段 更新字段 并且使用in 
  Topic::updateAll(
     ['view_count' => new Expression('`view_count` + 1'), 'updated_at' => time()],
-    ['id' => $id]
+    ['id' => $id]  //注: $id 是一个数组,如 [12,13]  相当于 id in (12,13)
 );
 
 // 其它使用
