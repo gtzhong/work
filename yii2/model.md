@@ -399,6 +399,16 @@ $users = User::find()
    ->all();
 ```
 
+## where_or_两个like_
+```php
+    $model->andFilterWhere([
+        'or',
+        ['like', 'name', $_key],
+        ['like', 'source_name', $_key]
+    ]);
+```
+
+
 ## where_like
 ```php
   $query->andFilterWhere(['like', 'product.name', $_product_name]);

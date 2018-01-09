@@ -324,6 +324,7 @@
 				- [where_大于小于](model.md#where_大于小于) (andFilterWhere)
 				- [where_in](model.md#where_in) 
 				- [where_or](model.md#where_or) and
+				- [where_or_两个like_](model.md#where_or_两个like_) like
 				- [where_like查询](model.md#where_like) (andFilterWhere)
 			- Expression()  查询不过滤
 				- [sql语句不过滤](model.md#sql语句不过滤)
