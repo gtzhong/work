@@ -1,0 +1,30 @@
+https://docs.microsoft.com/zh-cn/dotnet/framework/get-started/overview
+ .NET Framework 开发下列类型的应用和服务：
+Console 应用。 请参阅生成控制台应用程序。
+Windows GUI 应用（Windows 窗体）。 请参阅 Windows 窗体。
+Windows Presentation Foundation (WPF) 应用。 请参阅 Windows Presentation Foundation。
+ASP.NET 应用。 请参阅使用 ASP.NET 的 Web 应用程序。
+Windows 服务。 请参阅 Windows 服务应用程序简介。
+使用 Windows Communication Foundation (WCF) 的面向服务的应用。 请参阅使用 WCF 的面向服务的应用程序。
+使用 Windows Workflow Foundation (WF) 的启用工作流程的应用。 请参阅在 .NET Framework 中生成工作流。
+
+
+
+帮助文档 MSDN
+https://msdn.microsoft.com/zh-cn/
+
+https://docs.microsoft.com/zh-cn/dotnet/framework/winforms/windows-forms-overview
+
+Windows 窗体概述  
+  Winform：Windows Form的简称
+
+
+微叮.net framework开发的版本4.5.1
+
+
+
+张推荐  《C#入门经典》
+
+
+
+
