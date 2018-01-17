@@ -5,9 +5,9 @@ python版本:3.6.1
 
 使用方法:
      python count.py
-     python count.py log 1 #查看日志前1条
-     python count.py log 2 #查看日志前2条
-     python count.py log 3 #查看日志前3条
+     python count.py log 1 #输出1条IP对应的地址
+     python count.py log 2 #输出2条IP对应的地址
+     python count.py log 3 #输出3条IP对应的地址
 '''
 
 import re
