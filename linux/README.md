@@ -138,7 +138,9 @@
 			```
 		- netstat
 			- netstat -ntpl		//查询端口列表
-			- netstat -tunpl
+			- netstat -tunpl 
+				- netstat -tunal | grep 80
+			- lsof -i:9200  //通过端口9200获取指定的进程名 
 	- ssh
 		- ssh 202.104.102.444 -p 5804  //远程登陆
 	- 防火墙 iptables
