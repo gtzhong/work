@@ -114,4 +114,6 @@
                     - 开发者工具
                 - Management
                     - 配置
+- 案例
+    - 集群监控ElasticSearch实战
 - 
