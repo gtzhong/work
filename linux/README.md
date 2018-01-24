@@ -198,6 +198,9 @@
 	  - pt xx  //搜索神器 [windows下执行]
 		  - choco install pt //安装
 		  - pt xx ./* 或 ./    //最后加上 ./* 或 ./ 是比较完整,否则有些目录是不会搜索
+		  - 使用技巧 
+			-   pt -e "(editplus)(正则)"   //与关系 同时出现的多个关键字 如 editplus 和 正则
+			-   pt -e "(editplus)|(节点)"  //或关系 搜索任意关键字
 		- cat /etc/redhat-release  //查看 linux 发布版本
 	- choco安装
 		- 以管理员权限打开cmd
