@@ -102,7 +102,8 @@
 	- 用户名：Free User   注册码：6AC8D-784D8-DDZ95-B8W3A-45TFA 
 	- 正则
 		- 举例
-			- [复制mind节点到markdown](fn/editplus.md#复制mind节点到markdown)
+			- [复制xmind节点到markdown](fn/editplus.md#复制mind节点到markdown)
+			- [复制mindManager节点到markdown](fn/editplus.md#复制mindManager节点到markdown)
 	- 
 - Total Commander常用 
 	- 标签 

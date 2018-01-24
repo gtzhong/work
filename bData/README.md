@@ -115,5 +115,19 @@
                 - Management
                     - 配置
 - 案例
-    - 集群监控ElasticSearch实战
+ - 集群监控ElasticSearch实战 
+   - [拓扑图](fn/exp.md#拓扑图)
+   - 实战分析 Elasticsearch查询语句 
+   - 目标
+     - 收集Elasticsearch集群的查询语气
+     - 分析查询语句的常用语句、响应时长等
+   - 方案
+     - 应用Packetbeat + Logstash 完成数据收集工作
+     - 使用Kibana +  Elasticsearch 完成数据分析工作
+   - 配置
+     - [大致的配置流程](fn/exp.md#大致的配置流程)
+     - [logstash](fn/exp.md#logstash)
+     - packetbeat
+   - 实战之数据收集演示
+
 - 
